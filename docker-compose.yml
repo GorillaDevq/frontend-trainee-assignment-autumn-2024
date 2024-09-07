@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  react-app:
+    build:
+      context: .
+      dockerfile: docker/react-app/Dockerfile
+    ports:
+      - "3001:3001"
+
+  json-server:
+    build:
+      context: .
+      dockerfile: docker/json-server/Dockerfile
+    working_dir: /json-server
+    command: json-server --watch db.json --port 3000
+    ports:
+      - "3000:3000"

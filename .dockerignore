@@ -1,0 +1,6 @@
+node_modules
+build
+.idea
+.gitignore
+LICENSE
+.git
