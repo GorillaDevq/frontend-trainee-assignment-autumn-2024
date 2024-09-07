@@ -17,7 +17,6 @@ type Advertisment = {
     imageUrl?: string;
 }
 
-
 const OrderStatus = {
     Created: 0,
     Paid: 1,
@@ -25,9 +24,8 @@ const OrderStatus = {
     DeliveredToThePoint: 3,
     Received: 4,
     Archived: 5,
-    Refund: 6
+    Refund: 6,
 } as const;
-
 
 type OrderItem = Advertisment & { count: number; };
 
