@@ -3,16 +3,16 @@ import {
     fetchAdvertisementById,
 } from '../services/fetchAdvertisementByid/fetchAdvertisementByid';
 import { Advertisement } from '../types/advertisement';
-import { AdvertisementSchema } from '../types/advertisementSchema';
+import { AdvertisementDetailsSchema } from '../types/advertisementSchema';
 
-const initialState: AdvertisementSchema = {
+const initialState: AdvertisementDetailsSchema = {
     isLoading: false,
     error: undefined,
     data: undefined,
 };
 
-const advertisementSlice = createSlice({
-    name: 'advertisement',
+const advertisementDetailsSlice = createSlice({
+    name: 'advertisementDetails',
     initialState,
     reducers: {
     },
@@ -33,4 +33,4 @@ const advertisementSlice = createSlice({
     },
 });
 
-export const { actions: advertisementActions, reducer: advertisementReducer } = advertisementSlice;
+export const { actions: advertisementActions, reducer: advertisementReducer } = advertisementDetailsSlice;

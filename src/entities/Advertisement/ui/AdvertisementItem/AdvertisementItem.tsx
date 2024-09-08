@@ -10,7 +10,10 @@ type AdvertisementItemProps = {
     advertisement: Advertisement;
 }
 
-export const AdvertisementItem = ({ className, advertisement }: AdvertisementItemProps) => {
+export const AdvertisementItem = ({
+    className,
+    advertisement,
+}: AdvertisementItemProps) => {
     const {
         imageUrl,
         name,

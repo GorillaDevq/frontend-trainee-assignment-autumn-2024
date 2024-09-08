@@ -5,8 +5,8 @@ import { RoutePath } from 'shared/config/routeConfig/routeConfig';
 
 function App() {
     return (
-        <>
-            <header>
+        <div className="wrapper">
+            <header className="header">
                 <nav>
                     <Link to={RoutePath.orders}>
                         Заказы
@@ -21,10 +21,10 @@ function App() {
                     <AppRouter />
                 </main>
             </Suspense>
-            <footer>
+            <footer className="footer">
                 Подвал
             </footer>
-        </>
+        </div>
     );
 }
 

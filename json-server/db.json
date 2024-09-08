@@ -8,7 +8,7 @@
       "createdAt": "2022-08-12T20:16:55.351Z",
       "views": 20,
       "likes": 2,
-      "imageUrl": ""
+      "imageUrl": "https://cs1.livemaster.ru/storage/7b/b2/d41845077268373e01b5f5025086--vintazh-starinnyj-stul-antikvarnyj-stul-starinnaya-mebel-fran.jpg"
     },
     {
       "id": "2",
@@ -18,7 +18,7 @@
       "createdAt": "2023-08-12T20:16:55.351Z",
       "views": 77832,
       "likes": 45666,
-      "imageUrl": ""
+      "imageUrl": "https://media.istockphoto.com/id/912295846/ru/%D1%84%D0%BE%D1%82%D0%BE/%D0%B2%D0%B5%D0%B4%D1%80%D0%BE-%D1%81%D0%BD%D0%B5%D0%B3%D0%B0-%D0%B2-%D1%81%D0%BD%D0%B5%D0%B3%D1%83-%D0%BD%D0%B0-%D1%81%D1%83%D0%B3%D1%80%D0%BE%D0%B1%D0%B5-%D0%BA%D1%80%D1%83%D0%BF%D0%BD%D1%8B%D0%BC-%D0%BF%D0%BB%D0%B0%D0%BD%D0%BE%D0%BC.jpg?s=170667a&w=0&k=20&c=BnVREfCQjLWg84xAv41kxvOdeL_AX_Df8JAxOho-_ts="
     },
     {
       "id": "3",
@@ -27,7 +27,7 @@
       "createdAt": "2024-08-12T20:16:55.351Z",
       "views": 900,
       "likes": 19,
-      "imageUrl": ""
+      "imageUrl": "https://cdn.leroymerlin.ru/lmru/image/upload/f_auto/q_auto/dpr_1.0/c_pad/w_1000/h_1000/v1633341753/lmcode/rqH5gRRm_UeLaE9fJWtQ5Q/90036306_01.jpg"
     },
     {
       "id": "4",
@@ -37,7 +37,7 @@
       "createdAt": "2024-07-12T20:16:55.351Z",
       "views": 2000000,
       "likes": 2,
-      "imageUrl": ""
+      "imageUrl": "https://panna.ru/images/4/6/d100517502114l.jpg"
     },
     {
       "id": "5",
@@ -46,7 +46,7 @@
       "createdAt": "2024-06-12T20:16:55.351Z",
       "views": 0,
       "likes": 0,
-      "imageUrl": ""
+      "imageUrl": "https://img.ostin.com/upload/mdm/media_content/resize/a17/767_1062_82d3/106378080299.jpg"
     },
     {
       "id": "6",
@@ -56,7 +56,7 @@
       "createdAt": "2024-04-12T20:16:55.351Z",
       "views": 1,
       "likes": 0,
-      "imageUrl": ""
+      "imageUrl": "https://volgograd.ppack.ru/image/cache/data/catalog2017/Gofrokoroba-category-800x600.jpg"
     },
     {
       "id": "7",
@@ -66,7 +66,7 @@
       "createdAt": "2024-08-12T14:16:55.351Z",
       "views": 20000,
       "likes": 1,
-      "imageUrl": ""
+      "imageUrl": "https://sola-m.ru/wp-content/uploads/2022/10/uglovoj-divan-soft-9-1.jpg"
     },
     {
       "id": "8",
@@ -75,7 +75,7 @@
       "createdAt": "2024-08-12T12:16:55.351Z",
       "views": 200000,
       "likes": 302,
-      "imageUrl": ""
+      "imageUrl": "https://s0.rbk.ru/v6_top_pics/media/img/0/64/756629830857640.jpg"
     }
   ],
   "orders": [
@@ -94,7 +94,7 @@
           "createdAt": "2024-08-12T12:16:55.351Z",
           "views": 200000,
           "likes": 302,
-          "imageUrl": "",
+          "imageUrl": "https://s0.rbk.ru/v6_top_pics/media/img/0/64/756629830857640.jpg",
           "count": 3
         },
         {
@@ -105,7 +105,7 @@
           "createdAt": "2024-04-12T20:16:55.351Z",
           "views": 1,
           "likes": 0,
-          "imageUrl": "",
+          "imageUrl": "https://volgograd.ppack.ru/image/cache/data/catalog2017/Gofrokoroba-category-800x600.jpg",
           "count": 2
         }
       ]
@@ -126,7 +126,7 @@
           "createdAt": "2023-08-12T20:16:55.351Z",
           "views": 77832,
           "likes": 45666,
-          "imageUrl": "",
+          "imageUrl": "https://media.istockphoto.com/id/912295846/ru/%D1%84%D0%BE%D1%82%D0%BE/%D0%B2%D0%B5%D0%B4%D1%80%D0%BE-%D1%81%D0%BD%D0%B5%D0%B3%D0%B0-%D0%B2-%D1%81%D0%BD%D0%B5%D0%B3%D1%83-%D0%BD%D0%B0-%D1%81%D1%83%D0%B3%D1%80%D0%BE%D0%B1%D0%B5-%D0%BA%D1%80%D1%83%D0%BF%D0%BD%D1%8B%D0%BC-%D0%BF%D0%BB%D0%B0%D0%BD%D0%BE%D0%BC.jpg?s=170667a&w=0&k=20&c=BnVREfCQjLWg84xAv41kxvOdeL_AX_Df8JAxOho-_ts=",
           "count": 10
         },
         {
@@ -136,7 +136,7 @@
           "createdAt": "2024-06-12T20:16:55.351Z",
           "views": 0,
           "likes": 0,
-          "imageUrl": "",
+          "imageUrl": "https://img.ostin.com/upload/mdm/media_content/resize/a17/767_1062_82d3/106378080299.jpg",
           "count": 5
         }
       ]

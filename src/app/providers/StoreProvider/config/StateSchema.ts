@@ -1,9 +1,9 @@
 import { AxiosInstance } from 'axios';
 import { AppDispatch } from 'app/providers/StoreProvider';
-import { AdvertisementSchema } from 'entities/Advertisement';
+import { AdvertisementDetailsSchema } from 'entities/Advertisement';
 
 export type StateSchema = {
-    advertisement: AdvertisementSchema
+    advertisementDetails: AdvertisementDetailsSchema
 }
 
 export type ThunkExtraArg = {

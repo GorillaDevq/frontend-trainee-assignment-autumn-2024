@@ -1,0 +1,26 @@
+.advertisement {
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+        row-gap: 30px;
+    }
+
+    &__information {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__description {
+        display: flex;
+        column-gap: 20px;
+    }
+
+    &__image {
+        height: 500px;
+        width: 640px;
+        object-fit: contain;
+
+    }
+
+}

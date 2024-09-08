@@ -1,22 +1,18 @@
 @import "./vendor/normalize";
 @import "./variables/global";
 
-.wrapper {
+.root {
     font-family: "Times New Roman", Arial, sans-serif;
     background: $background-wrapper;
     min-height: 100vh;
 }
 
-.content-page {
-    padding-top: 50px;
+.wrapper {
     max-width: 1440px;
     margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    row-gap: 50px;
+    padding: 0 50px;
 }
 
-td, th {
-    border: 1px solid $primary-color;
+.header, .footer {
+    padding: 30px 0;
 }

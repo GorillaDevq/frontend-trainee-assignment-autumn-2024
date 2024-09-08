@@ -3,4 +3,4 @@ export {
     ThunkConfig,
 } from './config/StateSchema';
 export { StoreProvider } from './ui/StoreProvider';
-export { createReduxStore, AppDispatch } from './config/store';
+export { createReduxStore, AppDispatch, RootState } from './config/store';

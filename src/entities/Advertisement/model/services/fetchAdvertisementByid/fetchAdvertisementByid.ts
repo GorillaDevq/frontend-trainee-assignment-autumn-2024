@@ -3,7 +3,7 @@ import { ThunkConfig } from 'app/providers/StoreProvider';
 import { Advertisement } from '../../types/advertisement';
 
 export const fetchAdvertisementById = createAsyncThunk<Advertisement, string, ThunkConfig<string>>(
-    'articleDetails/fetchAdvertisementById',
+    'advertisementDetails/fetchAdvertisementById',
     async (advertisementId, thunkApi) => {
         const { extra, rejectWithValue } = thunkApi;
         try {

@@ -1,7 +1,18 @@
 import { BugButton } from 'app/providers/ErrorBoundary/ui/BugButton';
 import { AdvertisementItem } from 'entities/Advertisement';
+import { useEffect } from 'react';
+import { useAppDispatch } from 'shared/hooks/useAppDispatch';
+import {
+    fetchAdvertisementById,
+} from 'entities/Advertisement/model/services/fetchAdvertisementByid/fetchAdvertisementByid';
 
 function AdvertisementsPage() {
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+        dispatch(fetchAdvertisementById('1'));
+    }, [dispatch]);
+
     return (
         <div>
             <BugButton />

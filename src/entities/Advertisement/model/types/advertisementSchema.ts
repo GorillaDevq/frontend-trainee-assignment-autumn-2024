@@ -1,6 +1,6 @@
 import { Advertisement } from './advertisement';
 
-export type AdvertisementSchema = {
+export type AdvertisementDetailsSchema = {
     isLoading: boolean,
     error: string | undefined,
     data: Advertisement | undefined,
