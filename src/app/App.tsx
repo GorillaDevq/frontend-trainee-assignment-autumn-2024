@@ -1,8 +1,13 @@
+import { Suspense } from 'react';
+import { AppRouter } from 'app/providers/router';
+
 function App() {
     return (
-        <div>
-            aasdsad
-        </div>
+        <Suspense fallback="LOADING....">
+            <main className="content-page">
+                <AppRouter />
+            </main>
+        </Suspense>
     );
 }
 
