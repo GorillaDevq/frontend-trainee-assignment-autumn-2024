@@ -1,18 +1,18 @@
-@mixin input-reset {
-    border: none;
-    background: none;
-    outline: none;
+@mixin input_reset {
     padding: 0;
-}
-
-@mixin button-reset {
     border: none;
     background: none;
     outline: none;
 }
 
-@mixin fieldset-reset {
+@mixin button_reset {
     border: none;
+    background: none;
+    outline: none;
+}
+
+@mixin fieldset_reset {
     padding: 0;
+    border: none;
     margin: 0;
 }
