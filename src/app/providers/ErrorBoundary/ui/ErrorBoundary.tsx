@@ -1,11 +1,11 @@
 import React, { ErrorInfo, ReactNode, Suspense } from 'react';
 import { ErrorPage } from 'pages/ErrorPage';
 
-interface ErrorBoundaryProps {
+type ErrorBoundaryProps = {
     children: ReactNode;
 }
 
-interface ErrorBoundaryState {
+type ErrorBoundaryState = {
     hasError: boolean;
 }
 

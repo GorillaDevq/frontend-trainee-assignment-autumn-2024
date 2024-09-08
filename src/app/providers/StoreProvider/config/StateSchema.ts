@@ -2,15 +2,15 @@ import { AxiosInstance } from 'axios';
 import { AppDispatch } from 'app/providers/StoreProvider';
 import { AdvertisementSchema } from 'entities/Advertisement';
 
-export interface StateSchema {
+export type StateSchema = {
     advertisement: AdvertisementSchema
 }
 
-export interface ThunkExtraArg {
+export type ThunkExtraArg = {
     api: AxiosInstance;
 }
 
-export interface ThunkConfig<T> {
+export type ThunkConfig<T> = {
     rejectValue: T;
     extra: ThunkExtraArg;
     dispatch: AppDispatch;
