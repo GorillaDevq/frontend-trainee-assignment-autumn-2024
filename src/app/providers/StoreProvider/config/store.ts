@@ -2,12 +2,14 @@ import {
     configureStore,
 } from '@reduxjs/toolkit';
 import { $api } from 'shared/api/api';
-import { advertisementReducer } from 'entities/Advertisement/model/slice/advertisementSlice';
+import { advertisementDetailsReducer } from 'entities/Advertisement';
+import { advertisementToEditReducer } from 'features/EditAdvertisement';
 import { ThunkExtraArg } from './StateSchema';
 
 export const createReduxStore = () => {
     const reducer = {
-        advertisementDetails: advertisementReducer,
+        advertisementDetails: advertisementDetailsReducer,
+        advertisementToEdit: advertisementToEditReducer,
     };
 
     const extraArg: ThunkExtraArg = {

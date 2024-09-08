@@ -1,0 +1,18 @@
+.button {
+    @include button_reset;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: $primary-transition;
+
+    &_primary {
+        color: white;
+        background-color: $primary-color;
+        padding: 0 15px;
+        border-radius: 6px;
+    }
+
+    &:hover {
+        background-color: $primary-color-hover;
+    }
+}

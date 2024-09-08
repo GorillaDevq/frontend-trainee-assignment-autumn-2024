@@ -1,0 +1,11 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+
+    &__edit {
+        min-height: 40px;
+        width: 150px;
+        align-self: end;
+    }
+}

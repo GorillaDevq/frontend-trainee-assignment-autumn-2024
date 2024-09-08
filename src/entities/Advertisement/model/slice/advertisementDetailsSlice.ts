@@ -15,6 +15,14 @@ const advertisementDetailsSlice = createSlice({
     name: 'advertisementDetails',
     initialState,
     reducers: {
+        setNewDetails: (state, { payload }: PayloadAction<Partial<Advertisement>>) => {
+            if (state.data) {
+                state.data = {
+                    ...state.data,
+                    ...payload,
+                };
+            }
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -33,4 +41,4 @@ const advertisementDetailsSlice = createSlice({
     },
 });
 
-export const { actions: advertisementActions, reducer: advertisementReducer } = advertisementDetailsSlice;
+export const { actions: advertisementDetailsActions, reducer: advertisementDetailsReducer } = advertisementDetailsSlice;

@@ -55,10 +55,10 @@ export const AdvertisementDetails = ({
                         src={advertisement?.imageUrl}
                         alt={advertisement?.name}
                     />
-                    <p className={cls.advertisement__about}>
+                    <div className={cls.advertisement__about}>
                         <h3>Описание</h3>
                         {advertisement?.description}
-                    </p>
+                    </div>
                 </div>
             </article>
         );
