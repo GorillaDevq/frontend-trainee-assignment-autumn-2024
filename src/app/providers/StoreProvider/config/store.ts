@@ -1,15 +1,17 @@
 import {
-    configureStore,
+    configureStore, ReducersMapObject,
 } from '@reduxjs/toolkit';
 import { $api } from 'shared/api/api';
 import { advertisementDetailsReducer } from 'entities/Advertisement';
 import { advertisementToEditReducer } from 'features/EditAdvertisement';
-import { ThunkExtraArg } from './StateSchema';
+import { advertisementsPageReducer } from 'pages/AdvertisementsPage';
+import { StateSchema, ThunkExtraArg } from './StateSchema';
 
 export const createReduxStore = () => {
-    const reducer = {
+    const reducer: ReducersMapObject<StateSchema> = {
         advertisementDetails: advertisementDetailsReducer,
         advertisementToEdit: advertisementToEditReducer,
+        advertisementsPage: advertisementsPageReducer,
     };
 
     const extraArg: ThunkExtraArg = {
