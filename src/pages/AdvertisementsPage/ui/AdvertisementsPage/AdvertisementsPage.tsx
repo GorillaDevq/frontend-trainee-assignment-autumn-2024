@@ -1,11 +1,13 @@
-import { AdvertisementItem } from 'entities/Advertisement';
 import { useAppDispatch } from 'shared/hooks/useAppDispatch';
 import { useSelector } from 'react-redux';
 import { useCallback, useEffect, useState } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
+import { CreateAdvertisementModal } from 'features/CreateAdvertisement';
+import { ListWithInfinityScroll } from 'shared/ui/ListWithInfinityScroll/ListWithInfinityScroll';
+
 import {
-    CreateAdvertisementModal,
-} from 'features/CreateAdvertisement/ui/CreateAdvertisementModal/CreateAdvertisementModal';
+    fetchNextAdvertisementsPage,
+} from '../../model/services/fetchNextAdvertisementsPage/fetchNextAdvertisementsPage';
 import {
     AdvertisementsPageFilters,
 } from '../AdvertisementsPageFilters/AdvertisementsPageFilters';
@@ -14,11 +16,16 @@ import {
 } from '../../model/services/fetchAdvertisementsList/fetchAdvertisementsList';
 import cls from './AdvertisementsPage.module.scss';
 import { getAdvertisementPageData } from '../../model/selectors/advertisementsPage';
+import { renderAdvertisementsListItem } from '../../lib/renderAdvertisementsListItem';
 
 function AdvertisementsPage() {
     const dispatch = useAppDispatch();
     const advertisements = useSelector(getAdvertisementPageData);
     const [isOpenModal, setIsOpenModal] = useState(false);
+
+    const onLoadNextAdvertisements = () => {
+        dispatch(fetchNextAdvertisementsPage());
+    };
 
     const onOpenModal = useCallback(() => {
         setIsOpenModal(true);
@@ -35,9 +42,11 @@ function AdvertisementsPage() {
     return (
         <section className={classNames(cls.page)}>
             <AdvertisementsPageFilters onOpen={onOpenModal} />
-            {!!advertisements.length && advertisements.map((item) => (
-                <AdvertisementItem advertisement={item} key={item.id} />
-            ))}
+            <ListWithInfinityScroll
+                onScrollEnd={onLoadNextAdvertisements}
+                itemsToRender={advertisements}
+                renderFunction={renderAdvertisementsListItem}
+            />
             <CreateAdvertisementModal isOpen={isOpenModal} onClose={onCloseModal} />
         </section>
     );

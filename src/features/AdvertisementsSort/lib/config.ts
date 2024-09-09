@@ -11,6 +11,10 @@ export const ORDER_OPTIONS = [
 
 export const SORT_FIELD_OPTIONS = [
     {
+        value: '',
+        content: 'без сортировки',
+    },
+    {
         value: 'price',
         content: 'цене',
     },

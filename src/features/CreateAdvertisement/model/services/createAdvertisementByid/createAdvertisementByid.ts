@@ -2,18 +2,24 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from 'app/providers/StoreProvider';
 import { Advertisement } from 'entities/Advertisement';
 
-type editAdvertisementByIdPayload = Partial<Advertisement>
+type createAdvertisementByIdPayload = Pick<Advertisement, 'name' | 'description' | 'price' | 'imageUrl'>
 
 export const createAdvertisementByid = createAsyncThunk<
     Advertisement,
-    editAdvertisementByIdPayload,
+    createAdvertisementByIdPayload,
     ThunkConfig<string>
 >(
     'advertisementToEdit/editAdvertisementById',
-    async ({ id, ...advertisementData }, thunkApi) => {
+    async (advertisementData, thunkApi) => {
         const { extra, rejectWithValue } = thunkApi;
+        const dateNow = new Date().toISOString();
         try {
-            const response = await extra.api.patch<Advertisement>(`/advertisements/${id}`, advertisementData);
+            const response = await extra.api.post<Advertisement>('/advertisements', {
+                createdAt: dateNow,
+                views: 0,
+                likes: 0,
+                ...advertisementData,
+            });
 
             if (!response.data) throw new Error();
 

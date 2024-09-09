@@ -43,6 +43,15 @@ export const AdvertisementSortSelectors = ({
                 value={order}
                 onChange={changeOrderHandler}
                 className={cls.order}
+                readonly={!sort.length}
+            />
+            <Select
+                options={ORDER_OPTIONS}
+                label="по"
+                value={order}
+                onChange={changeOrderHandler}
+                className={cls.order}
+                readonly={!sort.length}
             />
         </div>
     );

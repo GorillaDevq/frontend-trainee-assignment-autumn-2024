@@ -1,14 +1,10 @@
 import { useForm } from 'react-hook-form';
 import { useAppDispatch } from 'shared/hooks/useAppDispatch';
-import { useSelector } from 'react-redux';
-import { getAdvertisementDetailsData } from 'entities/Advertisement/model/selectors/advertisementDetails';
-import { useEffect } from 'react';
 import { InputField } from 'shared/ui/InputField/InputField';
 import { Button } from 'shared/ui/Button/Button';
 import {
-    editAdvertisementById,
-} from 'features/EditAdvertisement/model/services/editAdvertisementByid/editAdvertisementByid';
-import { advertisementDetailsActions } from 'entities/Advertisement';
+    createAdvertisementByid,
+} from 'features/CreateAdvertisement/model/services/createAdvertisementByid/createAdvertisementByid';
 import cls from './CreateAdvertisementForm.module.scss';
 
 type FormDataType = {
@@ -25,32 +21,15 @@ type EditAdvertisementFormProps = {
 
 export const CreateAdvertisementForm = ({ className, onClose }:EditAdvertisementFormProps) => {
     const dispatch = useAppDispatch();
-    const advertisement = useSelector(getAdvertisementDetailsData);
 
     const {
-        register, handleSubmit, reset, formState: { errors },
+        register, handleSubmit, formState: { errors },
     } = useForm<FormDataType>();
     const isLoading = false;
 
-    useEffect(() => {
-        if (advertisement) {
-            reset({
-                imageUrl: advertisement.imageUrl || '',
-                name: advertisement.name || '',
-                description: advertisement.description || '',
-                price: advertisement.price || 0,
-            });
-        }
-    }, [advertisement, reset]);
-
     const onSubmit = async (data: FormDataType) => {
-        if (advertisement && advertisement.id) {
-            const response = await dispatch(editAdvertisementById({ id: advertisement.id, ...data }));
-            if (response.meta.requestStatus === 'fulfilled') {
-                dispatch(advertisementDetailsActions.setNewDetails(response.meta.arg));
-                onClose();
-            }
-        }
+        const response = await dispatch(createAdvertisementByid(data));
+        if (response.meta.requestStatus === 'fulfilled') onClose();
     };
 
     return (

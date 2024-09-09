@@ -12,8 +12,8 @@
     cursor: pointer;
 }
 
-@mixin fieldset_reset {
+@mixin list_reset {
     padding: 0;
-    border: none;
     margin: 0;
+    list-style: none;
 }

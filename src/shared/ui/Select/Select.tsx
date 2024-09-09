@@ -2,12 +2,12 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import { ChangeEvent, useMemo } from 'react';
 import cls from './Select.module.scss';
 
-export interface SelectOptions {
+type SelectOptions = {
     value: string;
     content: string;
 }
 
-interface SelectProps {
+type SelectProps = {
     className?: string;
     label?: string;
     options?: SelectOptions[];

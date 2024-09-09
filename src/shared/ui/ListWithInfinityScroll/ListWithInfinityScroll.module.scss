@@ -1,0 +1,9 @@
+.list {
+    @include list_reset;
+    height: 500px;
+    overflow-y: auto;
+    &__trigger {
+        height: 10px;
+        margin: 5px 0;
+    }
+}
