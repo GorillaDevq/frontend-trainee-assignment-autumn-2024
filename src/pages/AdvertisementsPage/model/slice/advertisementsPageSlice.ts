@@ -1,29 +1,40 @@
-import { createEntityAdapter, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Advertisement } from 'entities/Advertisement';
-import { StateSchema } from 'app/providers/StoreProvider';
 import {
     fetchAdvertisementsList,
 } from '../services/fetchAdvertisementsList/fetchAdvertisementsList';
 import { AdvertisementPageSchema } from '../types/advertisementPageSchema';
 
-const advertisementsAdapter = createEntityAdapter<Advertisement>({
-    selectId: (advertisement) => advertisement.id,
-});
+const initialState: AdvertisementPageSchema = {
+    isLoading: false,
+    error: undefined,
+    listData: [],
 
-export const getAdvertisements = advertisementsAdapter.getSelectors<StateSchema>(
-    (state) => state.advertisementsPage || advertisementsAdapter.getInitialState(),
-);
+    page: 1,
+    limit: 9,
+    hasMore: true,
+
+    sort: 'price',
+    search: '',
+    order: 'asc',
+};
 
 const advertisementsPageSlice = createSlice({
     name: 'advertisementsPage',
-    initialState: advertisementsAdapter.getInitialState<AdvertisementPageSchema>({
-        isLoading: false,
-        error: undefined,
-        ids: [],
-        entities: {},
-    }),
+    initialState,
     reducers: {
-
+        setPage: (state, action: PayloadAction<number>) => {
+            state.page = action.payload;
+        },
+        setOrder: (state, action: PayloadAction<string>) => {
+            state.order = action.payload;
+        },
+        setSort: (state, action: PayloadAction<string>) => {
+            state.sort = action.payload;
+        },
+        setSearch: (state, action: PayloadAction<string>) => {
+            state.search = action.payload;
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -36,7 +47,8 @@ const advertisementsPageSlice = createSlice({
                 action: PayloadAction<Advertisement[]>,
             ) => {
                 state.isLoading = false;
-                advertisementsAdapter.setAll(state, action.payload);
+                state.hasMore = action.payload.length >= state.limit;
+                state.listData = [...state.listData, ...action.payload];
             })
             .addCase(fetchAdvertisementsList.rejected, (state, action) => {
                 state.isLoading = false;

@@ -1,1 +1,16 @@
+.input {
+    @include input_reset;
 
+    &_primary {
+        background: $background-primary-color;
+        border-radius: 4px;
+        border: 2px solid $background-primary-color;
+        outline: $primary-color;
+        padding: 5px 10px;
+
+        &:focus {
+            background: #fff;
+            border-color: $primary-color;
+        }
+    }
+}

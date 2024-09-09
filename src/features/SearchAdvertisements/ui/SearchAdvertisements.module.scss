@@ -1,0 +1,14 @@
+.search {
+    position: relative;
+    display: flex;
+    column-gap: 20px;
+
+    &__input {
+       flex-grow: 1;
+    }
+
+    &__submit {
+        display: flex;
+        column-gap: 5px;
+    }
+}

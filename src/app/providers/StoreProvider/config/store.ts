@@ -5,12 +5,14 @@ import { $api } from 'shared/api/api';
 import { advertisementDetailsReducer } from 'entities/Advertisement';
 import { advertisementToEditReducer } from 'features/EditAdvertisement';
 import { advertisementsPageReducer } from 'pages/AdvertisementsPage';
+import { advertisementToCreateReducer } from 'features/CreateAdvertisement';
 import { StateSchema, ThunkExtraArg } from './StateSchema';
 
 export const createReduxStore = () => {
     const reducer: ReducersMapObject<StateSchema> = {
         advertisementDetails: advertisementDetailsReducer,
         advertisementToEdit: advertisementToEditReducer,
+        advertisementToCreate: advertisementToCreateReducer,
         advertisementsPage: advertisementsPageReducer,
     };
 
