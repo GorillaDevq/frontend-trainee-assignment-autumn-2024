@@ -47,6 +47,7 @@ module.exports = {
         'no-param-reassign': 'off',
         'jsx-a11y/label-has-associated-control': 'off',
         'no-undef': 'off',
+        'react/jsx-one-expression-per-line': 'off',
     },
     globals: {
         __IS_DEV__: true,

@@ -32,6 +32,14 @@ export default function buildLoaders({ isDev }: BuildOptions): webpack.RuleSetRu
         ],
     };
 
+    const fileLoader = {
+        test: /\.(png|jpg|jpeg|gif|woff|woff2|ttf)$/i,
+        type: 'asset/resource',
+        generator: {
+            filename: 'assets/[name][ext]',
+        },
+    };
+
     const svgLoader = {
         test: /\.svg$/i,
         issuer: /\.[jt]sx?$/,
@@ -50,5 +58,11 @@ export default function buildLoaders({ isDev }: BuildOptions): webpack.RuleSetRu
         },
     };
 
-    return [svgLoader, babelLoader, typeScriptLoader, scssLoader];
+    return [
+        svgLoader,
+        fileLoader,
+        babelLoader,
+        typeScriptLoader,
+        scssLoader,
+    ];
 }

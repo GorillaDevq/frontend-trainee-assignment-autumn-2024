@@ -47,7 +47,9 @@ export const AdvertisementDetails = ({
             <article className={cls.advertisement__container}>
                 <div className={cls.advertisement__information}>
                     <h2 className={cls.advertisement__title}>{advertisement?.name}</h2>
-                    <p className={cls.advertisement__price}>{advertisement?.price}</p>
+                    <p className={cls.advertisement__price}>
+                        Стоимость: {advertisement?.price} руб.
+                    </p>
                 </div>
                 <div className={cls.advertisement__description}>
                     <img
@@ -56,7 +58,7 @@ export const AdvertisementDetails = ({
                         alt={advertisement?.name}
                     />
                     <div className={cls.advertisement__about}>
-                        <h3>Описание</h3>
+                        <h3 className={cls.advertisement__aboutTitle}>Описание</h3>
                         {advertisement?.description}
                     </div>
                 </div>

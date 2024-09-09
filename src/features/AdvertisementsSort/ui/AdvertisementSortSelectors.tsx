@@ -39,10 +39,10 @@ export const AdvertisementSortSelectors = ({
     };
 
     return (
-        <div className={classNames(cls.ArticleSortSelector, {}, [className])}>
+        <div className={classNames(cls.list, {}, [className])}>
             <Select
                 options={SORT_FIELD_OPTIONS}
-                label="Сортировать ПО"
+                label="Сортировать по:"
                 value={sort}
                 onChange={changeSortHandler}
             />

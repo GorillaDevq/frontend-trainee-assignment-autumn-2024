@@ -1,21 +1,11 @@
 import { Suspense } from 'react';
 import { AppRouter } from 'app/providers/router';
-import { Link } from 'react-router-dom';
-import { RoutePath } from 'shared/config/routeConfig/routeConfig';
+import { Header } from 'widjets/Header';
 
 function App() {
     return (
         <div className="wrapper">
-            <header className="header">
-                <nav>
-                    <Link to={RoutePath.orders}>
-                        Заказы
-                    </Link>
-                    <Link to={RoutePath.advertisements}>
-                        Объявления
-                    </Link>
-                </nav>
-            </header>
+            <Header />
             <Suspense fallback="LOADING....">
                 <main className="content-page">
                     <AppRouter />

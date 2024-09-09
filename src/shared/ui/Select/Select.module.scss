@@ -2,15 +2,23 @@
     background: none;
     outline: none;
     color: #000;
+    font: $font_text_s;
     padding: 2px 10px 2px 2px;
-    border: 1px solid #000;
+    box-sizing: border-box;
+    border: 1px solid $primary-color;
+    border-radius: 5px;
 
     &__wrapper {
+        padding: 10px;
+        background: $background-primary-color;
         display: flex;
+        flex-direction: column;
+        gap: 10px;
     }
 
     &__label {
-        margin-right: 5px;
+        margin: 0;
+        font: $font_text_s;
     }
 
     &__option {

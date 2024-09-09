@@ -1,6 +1,46 @@
-$primary-color: #0af;
-$primary-color-hover: #0099f7;
-$primary-transition: all 0.3s ease-in-out;
-
 // Инпуты
 $background-primary-color: #f2f1f0;
+
+/* Глобальные цвета */
+$primary-color: #0af;
+$primary-color-hover: #0099f7;
+$background-primary-color: #f2f1f0;
+
+$color_interface_modal_bg: #fff;
+
+
+$color_interface_bg: #f8f4f2;
+$color_primary: #ff4141;
+$color_text_light: #fff;
+$color_text_dark: #001A34;
+$color_text_grey: #667685;
+$color_interface_notification: #0cc;
+
+/* Глобальные переменные шрифтов: */
+$font_family: "JetBrains", arial, sans-serif;
+
+$font_text_s: 400 14px/1.4 $font_family;
+$font_text_m: 700 20px/1.4 $font_family;
+$font_text_l: 700 26px/1.4 $font_family;
+$font_text_xl: 700 32px/1.4 $font_family;
+
+/* Размеры: */
+
+/* Максимальная ширина элементов: */
+$max_width_container: 1280px;
+
+/* Анимации и транзиции: */
+$primary-transition: all 0.3s ease-in-out;
+
+/* Прозрачность: */
+$base_opacity: .6;
+
+/* Скругление: */
+$base_border_radius: 6px;
+
+/* Тени: */
+$base_box_shadow: .6px .6px 6px var($color_text_grey);
+
+/* Отступы: */
+$base_padding: 5%;
+

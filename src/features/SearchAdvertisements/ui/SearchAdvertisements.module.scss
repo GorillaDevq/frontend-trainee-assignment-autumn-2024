@@ -2,9 +2,11 @@
     position: relative;
     display: flex;
     column-gap: 20px;
+    height: min-content;
 
     &__input {
-       flex-grow: 1;
+        flex-grow: 1;
+        border-radius: 10px;
     }
 
     &__submit {

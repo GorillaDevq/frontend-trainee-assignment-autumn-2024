@@ -92,7 +92,11 @@ export const EditAdvertisementForm = ({ className, onClose }:EditAdvertisementFo
                 }}
                 placeholder="Введите описание товара"
             />
-            <Button type="submit" disabled={isLoading}>
+            <Button
+                className={cls.button}
+                type="submit"
+                disabled={isLoading}
+            >
                 {isLoading ? 'Loading...' : 'Submit'}
             </Button>
         </form>

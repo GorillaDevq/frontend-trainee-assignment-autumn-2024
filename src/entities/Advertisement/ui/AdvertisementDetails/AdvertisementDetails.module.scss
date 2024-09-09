@@ -11,16 +11,42 @@
         justify-content: space-between;
     }
 
-    &__description {
-        display: flex;
-        column-gap: 20px;
+    &__title {
+        margin: 0;
+        font: $font_text_xl;
     }
 
-    &__image {
-        height: 500px;
-        width: 640px;
-        object-fit: contain;
+    &__price {
+        margin: 0;
+        font: $font_text_l;
+        font-weight: 400;
+    }
 
+    &__description {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 20px;
+        background-color: $background-primary-color;
+        border-radius: 10px;
+    }
+
+
+    &__image {
+        width: 100%;
+        max-height: 500px;
+        object-fit: contain;
+        border-radius: 10px;
+    }
+
+    &__about {
+        margin: 0;
+        font: $font_text_m;
+        font-weight: 400;
+    }
+
+    &__about-title {
+        margin: 0;
+        font: $font_text_l;
     }
 
 }

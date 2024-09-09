@@ -56,7 +56,8 @@ function AdvertisementsPage() {
     return (
         <section className={classNames(cls.page)}>
             <AdvertisementsPageFilters onOpen={onOpenModal} />
-            <List
+            <List<Advertisment>
+                className={cls.list}
                 itemsToRender={advertisements}
                 renderFunction={renderAdvertisementsListItem}
             />

@@ -1,14 +1,18 @@
 .button {
     @include button_reset;
+
+    font: $font_text_m;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: $primary-color;
+    padding: 10px 15px;
     transition: $primary-transition;
+    height: min-content;
 
     &_primary {
         color: white;
         background-color: $primary-color;
-        padding: 0 15px;
         border-radius: 6px;
     }
 
@@ -16,3 +20,4 @@
         background-color: $primary-color-hover;
     }
 }
+

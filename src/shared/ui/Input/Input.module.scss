@@ -1,6 +1,8 @@
 .input {
     @include input_reset;
 
+    font: $font_text_s;
+
     &_primary {
         background: $background-primary-color;
         border-radius: 4px;
