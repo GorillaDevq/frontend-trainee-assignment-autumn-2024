@@ -6,6 +6,10 @@ import { CreateAdvertisementModal } from 'features/CreateAdvertisement';
 import { List } from 'shared/ui/List/List';
 
 import { FetchNextAdvertisements } from 'features/FetchNextAdvertisements';
+import { advertisementsPageActions } from 'pages/AdvertisementsPage';
+import {
+    fetchNextAdvertisementsPage,
+} from '../../model/services/fetchNextAdvertisementsPage/fetchNextAdvertisementsPage';
 import {
     AdvertisementsPageFilters,
 } from '../AdvertisementsPageFilters/AdvertisementsPageFilters';
@@ -17,19 +21,24 @@ import {
     getAdvertisementPageAmountToRender,
     getAdvertisementPageData,
     getAdvertisementPageEndNumberToRender,
+    getAdvertisementPageHasMore,
 } from '../../model/selectors/advertisementsPage';
 import { renderAdvertisementsListItem } from '../../lib/renderAdvertisementsListItem';
-import { advertisementsPageActions } from '../../model/slice/advertisementsPageSlice';
 
 function AdvertisementsPage() {
     const dispatch = useAppDispatch();
+
     const advertisements = useSelector(getAdvertisementPageData);
-    const amountToRender = useSelector(getAdvertisementPageAmountToRender);
-    const endNumberToRender = useSelector(getAdvertisementPageEndNumberToRender);
+    const amount = useSelector(getAdvertisementPageAmountToRender);
+    const endNumber = useSelector(getAdvertisementPageEndNumberToRender);
+    const hasMore = useSelector(getAdvertisementPageHasMore);
+
     const [isOpenModal, setIsOpenModal] = useState(false);
 
     const onLoadNextAdvertisements = () => {
-        dispatch(advertisementsPageActions.setEndNumberToRender(endNumberToRender + amountToRender));
+        dispatch(advertisementsPageActions.setStartNumberToRender(endNumber));
+        dispatch(advertisementsPageActions.setEndNumberToRender(endNumber + amount));
+        dispatch(fetchNextAdvertisementsPage());
     };
 
     const onOpenModal = useCallback(() => {
@@ -48,12 +57,12 @@ function AdvertisementsPage() {
         <section className={classNames(cls.page)}>
             <AdvertisementsPageFilters onOpen={onOpenModal} />
             <List
-                itemsToRender={advertisements?.slice(0, endNumberToRender)}
+                itemsToRender={advertisements}
                 renderFunction={renderAdvertisementsListItem}
             />
             <FetchNextAdvertisements
                 onClick={onLoadNextAdvertisements}
-                hasMore={!(endNumberToRender > advertisements?.length)}
+                hasMore={hasMore}
             />
             <CreateAdvertisementModal isOpen={isOpenModal} onClose={onCloseModal} />
         </section>

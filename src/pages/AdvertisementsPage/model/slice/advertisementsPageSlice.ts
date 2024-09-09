@@ -8,10 +8,12 @@ const initialState: AdvertisementPageSchema = {
     isLoading: false,
     error: undefined,
     listData: [],
-
+    // для пагинации
     amountToRender: 10,
     endNumberToRender: 10,
-
+    startNumberToRender: 0,
+    hasMore: true,
+    // для сортировки
     sort: 'price',
     search: '',
     order: 'asc',
@@ -21,6 +23,9 @@ const advertisementsPageSlice = createSlice({
     name: 'advertisementsPage',
     initialState,
     reducers: {
+        setStartNumberToRender: (state, action: PayloadAction<number>) => {
+            state.startNumberToRender = action.payload;
+        },
         setEndNumberToRender: (state, action: PayloadAction<number>) => {
             state.endNumberToRender = action.payload;
         },
@@ -48,10 +53,12 @@ const advertisementsPageSlice = createSlice({
                 action,
             ) => {
                 state.isLoading = false;
+                state.hasMore = action.payload.length >= state.endNumberToRender;
 
                 if (action.meta.arg.replace) {
                     state.listData = action.payload;
                     state.endNumberToRender = state.amountToRender;
+                    state.startNumberToRender = 0;
                 } else {
                     state.listData = [...state.listData, ...action.payload];
                 }
