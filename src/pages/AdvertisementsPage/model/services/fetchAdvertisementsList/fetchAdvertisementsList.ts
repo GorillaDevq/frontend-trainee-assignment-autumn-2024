@@ -24,7 +24,7 @@ export const fetchAdvertisementsList = createAsyncThunk<
         const limit = getAdvertisementPageLimit(getState());
         const sort = getAdvertisementPageSort(getState());
         const order = getAdvertisementPageOrder(getState());
-        const search = getAdvertisementPageSearch(getState());
+        const name = getAdvertisementPageSearch(getState());
         const page = getAdvertisementPageNumber(getState());
 
         try {
@@ -34,6 +34,7 @@ export const fetchAdvertisementsList = createAsyncThunk<
                     _page: page,
                     _sort: sort,
                     _order: order,
+                    ...(name?.length > 0 && { name }),
                 },
             });
 

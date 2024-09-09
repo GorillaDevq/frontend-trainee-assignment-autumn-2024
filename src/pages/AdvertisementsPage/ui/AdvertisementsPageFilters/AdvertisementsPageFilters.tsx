@@ -12,6 +12,7 @@ import { advertisementsPageActions } from 'pages/AdvertisementsPage';
 import {
     fetchAdvertisementsList,
 } from 'pages/AdvertisementsPage/model/services/fetchAdvertisementsList/fetchAdvertisementsList';
+import { useDebounce } from 'shared/hooks/useDebounce';
 import cls from './AdvertisementsPageFilters.module.scss';
 
 type AdvertisementsPageFiltersProps = {
@@ -25,16 +26,31 @@ export const AdvertisementsPageFilters = ({
     const sort = useSelector(getAdvertisementPageSort);
     const order = useSelector(getAdvertisementPageOrder);
 
+    const fetchData = () => {
+        dispatch(fetchAdvertisementsList({ replace: true }));
+    };
+
+    const debouncedFetchData = useDebounce(fetchData, 500);
+
     const onChangeSort = (newSort: string) => {
         dispatch(advertisementsPageActions.setSort(newSort));
         dispatch(advertisementsPageActions.setPage(1));
-        dispatch(fetchAdvertisementsList({ replace: true }));
+        debouncedFetchData();
     };
 
     const onChangeOrder = (newOrder: string) => {
         dispatch(advertisementsPageActions.setOrder(newOrder));
         dispatch(advertisementsPageActions.setPage(1));
-        dispatch(fetchAdvertisementsList({ replace: true }));
+        debouncedFetchData();
+    };
+
+    const onChangeSearch = (newSearch: string) => {
+        dispatch(advertisementsPageActions.setSearch(newSearch));
+    };
+
+    const onClickSearch = () => {
+        dispatch(advertisementsPageActions.setPage(1));
+        debouncedFetchData();
     };
 
     return (
@@ -45,7 +61,11 @@ export const AdvertisementsPageFilters = ({
                 onChangeOrder={onChangeOrder}
                 onChangeSort={onChangeSort}
             />
-            <SearchAdvertisements className={classNames(cls.filters__input)} />
+            <SearchAdvertisements
+                onChangeSearch={onChangeSearch}
+                onClickSearch={onClickSearch}
+                className={classNames(cls.filters__input)}
+            />
             <Button onClick={onOpen}>
                 Создать объявление
             </Button>

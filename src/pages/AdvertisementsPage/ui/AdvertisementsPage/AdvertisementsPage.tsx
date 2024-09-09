@@ -35,7 +35,7 @@ function AdvertisementsPage() {
     return (
         <section className={classNames(cls.page)}>
             <AdvertisementsPageFilters onOpen={onOpenModal} />
-            {advertisements.length && advertisements.map((item) => (
+            {!!advertisements.length && advertisements.map((item) => (
                 <AdvertisementItem advertisement={item} key={item.id} />
             ))}
             <CreateAdvertisementModal isOpen={isOpenModal} onClose={onCloseModal} />
