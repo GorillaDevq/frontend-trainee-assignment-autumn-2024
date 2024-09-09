@@ -3,11 +3,9 @@ import { useSelector } from 'react-redux';
 import { useCallback, useEffect, useState } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { CreateAdvertisementModal } from 'features/CreateAdvertisement';
-import { ListWithInfinityScroll } from 'shared/ui/ListWithInfinityScroll/ListWithInfinityScroll';
+import { List } from 'shared/ui/List/List';
 
-import {
-    fetchNextAdvertisementsPage,
-} from '../../model/services/fetchNextAdvertisementsPage/fetchNextAdvertisementsPage';
+import { FetchNextAdvertisements } from 'features/FetchNextAdvertisements';
 import {
     AdvertisementsPageFilters,
 } from '../AdvertisementsPageFilters/AdvertisementsPageFilters';
@@ -15,16 +13,23 @@ import {
     fetchAdvertisementsList,
 } from '../../model/services/fetchAdvertisementsList/fetchAdvertisementsList';
 import cls from './AdvertisementsPage.module.scss';
-import { getAdvertisementPageData } from '../../model/selectors/advertisementsPage';
+import {
+    getAdvertisementPageAmountToRender,
+    getAdvertisementPageData,
+    getAdvertisementPageEndNumberToRender,
+} from '../../model/selectors/advertisementsPage';
 import { renderAdvertisementsListItem } from '../../lib/renderAdvertisementsListItem';
+import { advertisementsPageActions } from '../../model/slice/advertisementsPageSlice';
 
 function AdvertisementsPage() {
     const dispatch = useAppDispatch();
     const advertisements = useSelector(getAdvertisementPageData);
+    const amountToRender = useSelector(getAdvertisementPageAmountToRender);
+    const endNumberToRender = useSelector(getAdvertisementPageEndNumberToRender);
     const [isOpenModal, setIsOpenModal] = useState(false);
 
     const onLoadNextAdvertisements = () => {
-        dispatch(fetchNextAdvertisementsPage());
+        dispatch(advertisementsPageActions.setEndNumberToRender(endNumberToRender + amountToRender));
     };
 
     const onOpenModal = useCallback(() => {
@@ -42,10 +47,13 @@ function AdvertisementsPage() {
     return (
         <section className={classNames(cls.page)}>
             <AdvertisementsPageFilters onOpen={onOpenModal} />
-            <ListWithInfinityScroll
-                onScrollEnd={onLoadNextAdvertisements}
-                itemsToRender={advertisements}
+            <List
+                itemsToRender={advertisements?.slice(0, endNumberToRender)}
                 renderFunction={renderAdvertisementsListItem}
+            />
+            <FetchNextAdvertisements
+                onClick={onLoadNextAdvertisements}
+                hasMore={!(endNumberToRender > advertisements?.length)}
             />
             <CreateAdvertisementModal isOpen={isOpenModal} onClose={onCloseModal} />
         </section>

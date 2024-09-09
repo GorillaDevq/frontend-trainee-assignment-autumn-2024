@@ -2,7 +2,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from 'app/providers/StoreProvider';
 import { Advertisement } from 'entities/Advertisement';
 import {
-    getAdvertisementPageLimit, getAdvertisementPageNumber,
     getAdvertisementPageOrder,
     getAdvertisementPageSearch,
     getAdvertisementPageSort,
@@ -19,19 +18,16 @@ export const fetchAdvertisementsList = createAsyncThunk<
 >(
     'advertisementsPage/fetchAdvertisementsList',
     async (props, thunkApi) => {
-        const { extra, rejectWithValue, getState } = thunkApi;
-
-        const limit = getAdvertisementPageLimit(getState());
+        const {
+            extra, rejectWithValue, getState, dispatch,
+        } = thunkApi;
         const sort = getAdvertisementPageSort(getState());
         const order = getAdvertisementPageOrder(getState());
         const name = getAdvertisementPageSearch(getState());
-        const page = getAdvertisementPageNumber(getState());
 
         try {
             const response = await extra.api.get<Advertisement[]>('/advertisements', {
                 params: {
-                    _limit: limit,
-                    _page: page,
                     _sort: sort,
                     _order: order,
                     ...(name?.length > 0 && { name }),

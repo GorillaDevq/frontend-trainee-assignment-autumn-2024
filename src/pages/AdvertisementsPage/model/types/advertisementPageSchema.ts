@@ -5,11 +5,8 @@ export type AdvertisementPageSchema = {
     error?: string;
     listData: Advertisement[];
 
-    // Пагинация
-    page: number;
-    limit: number;
-    hasMore: boolean;
-
+    amountToRender: number;
+    endNumberToRender: number;
     // Фильтры
     order: string;
     sort: string;

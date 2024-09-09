@@ -9,9 +9,8 @@ const initialState: AdvertisementPageSchema = {
     error: undefined,
     listData: [],
 
-    page: 1,
-    limit: 3,
-    hasMore: true,
+    amountToRender: 10,
+    endNumberToRender: 10,
 
     sort: 'price',
     search: '',
@@ -22,8 +21,11 @@ const advertisementsPageSlice = createSlice({
     name: 'advertisementsPage',
     initialState,
     reducers: {
-        setPage: (state, action: PayloadAction<number>) => {
-            state.page = action.payload;
+        setEndNumberToRender: (state, action: PayloadAction<number>) => {
+            state.endNumberToRender = action.payload;
+        },
+        setAmountToRender: (state, action: PayloadAction<number>) => {
+            state.amountToRender = action.payload;
         },
         setOrder: (state, action: PayloadAction<string>) => {
             state.order = action.payload;
@@ -46,10 +48,10 @@ const advertisementsPageSlice = createSlice({
                 action,
             ) => {
                 state.isLoading = false;
-                state.hasMore = action.payload.length >= state.limit;
 
                 if (action.meta.arg.replace) {
                     state.listData = action.payload;
+                    state.endNumberToRender = state.amountToRender;
                 } else {
                     state.listData = [...state.listData, ...action.payload];
                 }

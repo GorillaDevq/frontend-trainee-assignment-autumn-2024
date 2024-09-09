@@ -3,6 +3,7 @@ import { SearchAdvertisements } from 'features/SearchAdvertisements';
 import { Button } from 'shared/ui/Button/Button';
 import { AdvertisementSortSelectors } from 'features/AdvertisementsSort';
 import {
+    getAdvertisementPageAmountToRender,
     getAdvertisementPageOrder,
     getAdvertisementPageSort,
 } from 'pages/AdvertisementsPage/model/selectors/advertisementsPage';
@@ -25,6 +26,7 @@ export const AdvertisementsPageFilters = ({
     const dispatch = useAppDispatch();
     const sort = useSelector(getAdvertisementPageSort);
     const order = useSelector(getAdvertisementPageOrder);
+    const amount = useSelector(getAdvertisementPageAmountToRender);
 
     const fetchData = () => {
         dispatch(fetchAdvertisementsList({ replace: true }));
@@ -34,14 +36,16 @@ export const AdvertisementsPageFilters = ({
 
     const onChangeSort = (newSort: string) => {
         dispatch(advertisementsPageActions.setSort(newSort));
-        dispatch(advertisementsPageActions.setPage(1));
         debouncedFetchData();
     };
 
     const onChangeOrder = (newOrder: string) => {
         dispatch(advertisementsPageActions.setOrder(newOrder));
-        dispatch(advertisementsPageActions.setPage(1));
         debouncedFetchData();
+    };
+
+    const onChangeLimit = (newAmount: string) => {
+        dispatch(advertisementsPageActions.setAmountToRender(Number(newAmount)));
     };
 
     const onChangeSearch = (newSearch: string) => {
@@ -49,7 +53,6 @@ export const AdvertisementsPageFilters = ({
     };
 
     const onClickSearch = () => {
-        dispatch(advertisementsPageActions.setPage(1));
         debouncedFetchData();
     };
 
@@ -58,8 +61,10 @@ export const AdvertisementsPageFilters = ({
             <AdvertisementSortSelectors
                 sort={sort}
                 order={order}
+                amount={amount}
                 onChangeOrder={onChangeOrder}
                 onChangeSort={onChangeSort}
+                onChangeAmount={onChangeLimit}
             />
             <SearchAdvertisements
                 onChangeSearch={onChangeSearch}

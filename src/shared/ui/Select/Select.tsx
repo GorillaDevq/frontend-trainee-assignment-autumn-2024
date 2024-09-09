@@ -3,7 +3,7 @@ import { ChangeEvent, useMemo } from 'react';
 import cls from './Select.module.scss';
 
 type SelectOptions = {
-    value: string;
+    value: string | number;
     content: string;
 }
 

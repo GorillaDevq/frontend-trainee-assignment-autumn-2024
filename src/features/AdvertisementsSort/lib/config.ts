@@ -27,3 +27,22 @@ export const SORT_FIELD_OPTIONS = [
         content: 'лайкам',
     },
 ];
+
+export const AMOUNT_OPTIONS = [
+    {
+        value: 5,
+        content: '5',
+    },
+    {
+        value: 10,
+        content: '10',
+    },
+    {
+        value: 15,
+        content: '15',
+    },
+    {
+        value: 20,
+        content: '20',
+    },
+];

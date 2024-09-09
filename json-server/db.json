@@ -136,87 +136,8 @@
       "description": "Самурай",
       "price": 50,
       "id": "13"
-    },
-    {
-      "createdAt": "2024-09-09T14:34:21.653Z",
-      "views": 0,
-      "likes": 0,
-      "imageUrl": "https://sun9-20.userapi.com/impg/ICBpJQ6DTpooRLetoEhogNO774RS-A_gEj740w/IxfnvuNCS_M.jpg?size=774x519&quality=96&sign=4c26f9988df9431634b645a07c23a62a&type=album",
-      "name": "Самурай",
-      "description": "Самурай",
-      "price": 50,
-      "id": "14"
-    },
-    {
-      "createdAt": "2024-09-09T14:34:21.653Z",
-      "views": 0,
-      "likes": 0,
-      "imageUrl": "https://sun9-20.userapi.com/impg/ICBpJQ6DTpooRLetoEhogNO774RS-A_gEj740w/IxfnvuNCS_M.jpg?size=774x519&quality=96&sign=4c26f9988df9431634b645a07c23a62a&type=album",
-      "name": "Самурай",
-      "description": "Самурай",
-      "price": 50,
-      "id": "15"
-    },
-    {
-      "createdAt": "2024-09-09T14:34:21.653Z",
-      "views": 0,
-      "likes": 0,
-      "imageUrl": "https://sun9-20.userapi.com/impg/ICBpJQ6DTpooRLetoEhogNO774RS-A_gEj740w/IxfnvuNCS_M.jpg?size=774x519&quality=96&sign=4c26f9988df9431634b645a07c23a62a&type=album",
-      "name": "Самурай",
-      "description": "Самурай",
-      "price": 50,
-      "id": "16"
-    },
-    {
-      "createdAt": "2024-09-09T14:34:21.653Z",
-      "views": 0,
-      "likes": 0,
-      "imageUrl": "https://sun9-20.userapi.com/impg/ICBpJQ6DTpooRLetoEhogNO774RS-A_gEj740w/IxfnvuNCS_M.jpg?size=774x519&quality=96&sign=4c26f9988df9431634b645a07c23a62a&type=album",
-      "name": "Самурай",
-      "description": "Самурай",
-      "price": 50,
-      "id": "17"
-    },
-    {
-      "createdAt": "2024-09-09T14:34:21.653Z",
-      "views": 0,
-      "likes": 0,
-      "imageUrl": "https://sun9-20.userapi.com/impg/ICBpJQ6DTpooRLetoEhogNO774RS-A_gEj740w/IxfnvuNCS_M.jpg?size=774x519&quality=96&sign=4c26f9988df9431634b645a07c23a62a&type=album",
-      "name": "Самурай",
-      "description": "Самурай",
-      "price": 50,
-      "id": "18"
-    },
-    {
-      "createdAt": "2024-09-09T14:34:21.653Z",
-      "views": 0,
-      "likes": 0,
-      "imageUrl": "https://sun9-20.userapi.com/impg/ICBpJQ6DTpooRLetoEhogNO774RS-A_gEj740w/IxfnvuNCS_M.jpg?size=774x519&quality=96&sign=4c26f9988df9431634b645a07c23a62a&type=album",
-      "name": "Самурай",
-      "description": "Самурай",
-      "price": 50,
-      "id": "19"
-    },
-    {
-      "createdAt": "2024-09-09T14:34:21.653Z",
-      "views": 0,
-      "likes": 0,
-      "imageUrl": "https://sun9-20.userapi.com/impg/ICBpJQ6DTpooRLetoEhogNO774RS-A_gEj740w/IxfnvuNCS_M.jpg?size=774x519&quality=96&sign=4c26f9988df9431634b645a07c23a62a&type=album",
-      "name": "Самурай",
-      "description": "Самурай",
-      "price": 50,
-      "id": "20"
-    },
-    {
-      "createdAt": "2024-09-09T14:34:21.653Z",
-      "views": 0,
-      "likes": 0,
-      "imageUrl": "https://sun9-20.userapi.com/impg/ICBpJQ6DTpooRLetoEhogNO774RS-A_gEj740w/IxfnvuNCS_M.jpg?size=774x519&quality=96&sign=4c26f9988df9431634b645a07c23a62a&type=album",
-      "name": "Самурай",
-      "description": "Самурай",
-      "price": 50,
-      "id": "21"
     }
+
   ],
   "orders": [
     {
