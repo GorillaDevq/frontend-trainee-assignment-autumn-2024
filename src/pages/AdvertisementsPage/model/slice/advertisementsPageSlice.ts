@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Advertisement } from 'entities/Advertisement';
 import {
     fetchAdvertisementsList,
 } from '../services/fetchAdvertisementsList/fetchAdvertisementsList';
@@ -44,11 +43,16 @@ const advertisementsPageSlice = createSlice({
             })
             .addCase(fetchAdvertisementsList.fulfilled, (
                 state,
-                action: PayloadAction<Advertisement[]>,
+                action,
             ) => {
                 state.isLoading = false;
                 state.hasMore = action.payload.length >= state.limit;
-                state.listData = [...state.listData, ...action.payload];
+
+                if (action.meta.arg.replace) {
+                    state.listData = action.payload;
+                } else {
+                    state.listData = [...state.listData, ...action.payload];
+                }
             })
             .addCase(fetchAdvertisementsList.rejected, (state, action) => {
                 state.isLoading = false;

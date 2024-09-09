@@ -29,14 +29,14 @@ function AdvertisementsPage() {
     }, []);
 
     useEffect(() => {
-        dispatch(fetchAdvertisementsList());
+        dispatch(fetchAdvertisementsList({}));
     }, [dispatch]);
 
     return (
         <section className={classNames(cls.page)}>
             <AdvertisementsPageFilters onOpen={onOpenModal} />
             {advertisements.length && advertisements.map((item) => (
-                <AdvertisementItem advertisement={item} key={item.name} />
+                <AdvertisementItem advertisement={item} key={item.id} />
             ))}
             <CreateAdvertisementModal isOpen={isOpenModal} onClose={onCloseModal} />
         </section>

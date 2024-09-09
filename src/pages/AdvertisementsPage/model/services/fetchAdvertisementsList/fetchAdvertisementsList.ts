@@ -8,13 +8,17 @@ import {
     getAdvertisementPageSort,
 } from '../../selectors/advertisementsPage';
 
+type fetchAdvertisementsListProps = {
+    replace?: boolean;
+}
+
 export const fetchAdvertisementsList = createAsyncThunk<
     Advertisement[],
-    void,
+    fetchAdvertisementsListProps,
     ThunkConfig<string>
 >(
     'advertisementsPage/fetchAdvertisementsList',
-    async (_, thunkApi) => {
+    async (props, thunkApi) => {
         const { extra, rejectWithValue, getState } = thunkApi;
 
         const limit = getAdvertisementPageLimit(getState());

@@ -1,0 +1,20 @@
+.select {
+    background: none;
+    outline: none;
+    color: #000;
+    padding: 2px 10px 2px 2px;
+    border: 1px solid #000;
+
+    &__wrapper {
+        display: flex;
+    }
+
+    &__label {
+        margin-right: 5px;
+    }
+
+    &__option {
+        color: #fff;
+        background: $primary-color;
+    }
+}
