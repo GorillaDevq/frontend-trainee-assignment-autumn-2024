@@ -14,8 +14,18 @@ const OrderStatusMap = {
     [OrderStatus.Transport]: 'В пути',
     [OrderStatus.DeliveredToThePoint]: 'Доставлен в СРЦ',
     [OrderStatus.Received]: 'Получен',
-    [OrderStatus.Archived]: 'Архим',
+    [OrderStatus.Archived]: 'Архив',
     [OrderStatus.Refund]: 'Возврат',
 } as const;
+
+export const SORT_BUTTONS_STATUS = [
+    OrderStatus.Created,
+    OrderStatus.Paid,
+    OrderStatus.Transport,
+    OrderStatus.DeliveredToThePoint,
+    OrderStatus.Received,
+    OrderStatus.Archived,
+    OrderStatus.Refund,
+];
 
 export const getOrderStatusString = (status: typeof OrderStatus[keyof typeof OrderStatus]) => OrderStatusMap[status];

@@ -5,4 +5,5 @@ export type OrdersPageSchema = {
     // Фильтры
     order: string;
     sort: string;
+    status: number;
 }

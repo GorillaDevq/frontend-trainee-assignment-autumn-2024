@@ -25,40 +25,26 @@ export const AdvertisementSortSelectors = ({
     order,
     sort,
     amount,
-}: AdvertisementSortSelectorsProps) => {
-    const changeSortHandler = (newSort: string) => {
-        onChangeSort(newSort);
-    };
-
-    const changeOrderHandler = (newOrder: string) => {
-        onChangeOrder(newOrder);
-    };
-
-    const changeLimitHandler = (newAmount: string) => {
-        onChangeAmount(newAmount);
-    };
-
-    return (
-        <div className={classNames(cls.list, {}, [className])}>
-            <Select
-                options={SORT_FIELD_OPTIONS}
-                label="Сортировать по:"
-                value={sort}
-                onChange={changeSortHandler}
-            />
-            <Select
-                options={ORDER_OPTIONS}
-                label="по"
-                value={order}
-                onChange={changeOrderHandler}
-                readonly={!sort.length}
-            />
-            <Select
-                options={AMOUNT_OPTIONS}
-                label="Количество"
-                value={amount.toString()}
-                onChange={changeLimitHandler}
-            />
-        </div>
-    );
-};
+}: AdvertisementSortSelectorsProps) => (
+    <div className={classNames(cls.list, {}, [className])}>
+        <Select
+            options={SORT_FIELD_OPTIONS}
+            label="Сортировать по:"
+            value={sort}
+            onChange={onChangeSort}
+        />
+        <Select
+            options={ORDER_OPTIONS}
+            label="по"
+            value={order}
+            onChange={onChangeOrder}
+            readonly={!sort.length}
+        />
+        <Select
+            options={AMOUNT_OPTIONS}
+            label="Количество"
+            value={amount.toString()}
+            onChange={onChangeAmount}
+        />
+    </div>
+);

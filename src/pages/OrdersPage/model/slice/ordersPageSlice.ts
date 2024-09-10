@@ -9,8 +9,9 @@ const initialState: OrdersPageSchema = {
     error: undefined,
     listData: [],
     // для сортировки
-    sort: 'price',
+    sort: '',
     order: 'asc',
+    status: -1,
 };
 
 const ordersPageSlice = createSlice({
@@ -22,6 +23,9 @@ const ordersPageSlice = createSlice({
         },
         setSort: (state, action: PayloadAction<string>) => {
             state.sort = action.payload;
+        },
+        setStatus: (state, action: PayloadAction<number>) => {
+            state.status = action.payload;
         },
         clearState: (state) => {
             Object.assign(state, initialState);

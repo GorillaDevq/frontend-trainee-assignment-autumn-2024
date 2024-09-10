@@ -7,5 +7,6 @@ export const getOrdersPageIsLoading = (state: StateSchema) => state
 export const getOrdersPageError = (state: StateSchema) => state
     .ordersPage?.error;
 // Сортировка
-export const getAdvertisementPageOrder = (state: StateSchema) => state.ordersPage?.order;
-export const getAdvertisementPageSort = (state: StateSchema) => state.ordersPage?.sort;
+export const getOrdersPageOrder = (state: StateSchema) => state.ordersPage?.order;
+export const getOrdersPageSort = (state: StateSchema) => state.ordersPage?.sort;
+export const getOrdersPageStatus = (state: StateSchema) => state.ordersPage?.status;

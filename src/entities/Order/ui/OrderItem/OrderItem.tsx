@@ -34,7 +34,7 @@ export const OrderItem = ({
             </ul>
             <div>
                 <Button type="button">Завершить</Button>
-                <Button type="button">Показать </Button>
+                <Button type="button">Посмотреть товары</Button>
             </div>
         </div>
     );
