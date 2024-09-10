@@ -32,6 +32,9 @@ const advertisementsPageSlice = createSlice({
         setAmountToRender: (state, action: PayloadAction<number>) => {
             state.amountToRender = action.payload;
         },
+        setNewData: (state, action) => {
+            state.listData = action.payload;
+        },
         setOrder: (state, action: PayloadAction<string>) => {
             state.order = action.payload;
         },

@@ -8,17 +8,20 @@ import { Order } from 'entities/Order';
 import { useDebounce } from 'shared/hooks/useDebounce';
 import { OrderDetailsModal } from 'widjets/OrderDetailsModal/ui/OrderDetailsModal';
 import { fetchOrderDetails } from 'pages/OrdersPage/model/services/fetchOrderDetails/fetchOrderDetails';
+import { AdvertisementItemSkeleton } from 'entities/Advertisement';
 import { ordersPageActions } from '../../model/slice/ordersPageSlice';
 import { fetchOrdersList } from '../../model/services/fetchOrdersList/fetchOrdersList';
 import {
     getOrderItemsPage,
-    getOrdersPageData,
+    getOrdersPageData, getOrdersPageIsLoading,
     getOrdersPageOrder,
     getOrdersPageSort,
 } from '../../model/selectors/ordersPage';
 
 function OrdersPage() {
     const dispatch = useAppDispatch();
+
+    const isLoading = useSelector(getOrdersPageIsLoading);
     const orders = useSelector(getOrdersPageData);
     const orderItems = useSelector(getOrderItemsPage);
     const sort = useSelector(getOrdersPageSort);
@@ -79,6 +82,8 @@ function OrdersPage() {
                         <Order order={order} onClick={onOpenModal} />
                     </li>
                 )}
+                isLoading={isLoading}
+                Skeleton={AdvertisementItemSkeleton}
             />
             <OrderDetailsModal
                 isOpen={isOpenModal}

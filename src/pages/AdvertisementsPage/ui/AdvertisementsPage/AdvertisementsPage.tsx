@@ -8,6 +8,7 @@ import { FetchNextAdvertisements } from 'features/FetchNextAdvertisements';
 import { advertisementsPageActions } from 'pages/AdvertisementsPage';
 import { FormDataType } from 'widjets/AdvertisementModal/ui/AdvertisementForm/AdvertisementForm';
 import { AdvertisementModal } from 'widjets/AdvertisementModal';
+import { AdvertisementItemSkeleton } from 'entities/Advertisement';
 
 import {
     fetchNextAdvertisementsPage,
@@ -24,12 +25,14 @@ import {
     getAdvertisementPageData,
     getAdvertisementPageEndNumberToRender,
     getAdvertisementPageHasMore,
+    getAdvertisementPageIsLoading,
 } from '../../model/selectors/advertisementsPage';
 import { renderAdvertisementsListItem } from '../../lib/renderAdvertisementsListItem';
 
 function AdvertisementsPage() {
     const dispatch = useAppDispatch();
 
+    const isLoading = useSelector(getAdvertisementPageIsLoading);
     const advertisements = useSelector(getAdvertisementPageData);
     const amount = useSelector(getAdvertisementPageAmountToRender);
     const endNumber = useSelector(getAdvertisementPageEndNumberToRender);
@@ -70,10 +73,13 @@ function AdvertisementsPage() {
                 className={cls.list}
                 itemsToRender={advertisements}
                 renderFunction={renderAdvertisementsListItem}
+                isLoading={isLoading}
+                Skeleton={AdvertisementItemSkeleton}
             />
             <FetchNextAdvertisements
                 onClick={onLoadNextAdvertisements}
                 hasMore={hasMore}
+                disabled={isLoading}
             />
             <AdvertisementModal
                 onSubmit={onSubmitForm}
