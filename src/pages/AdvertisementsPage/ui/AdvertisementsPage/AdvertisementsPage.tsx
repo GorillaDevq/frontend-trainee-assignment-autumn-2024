@@ -1,12 +1,14 @@
 import { useAppDispatch } from 'shared/hooks/useAppDispatch';
 import { useSelector } from 'react-redux';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
-import { CreateAdvertisementModal } from 'features/CreateAdvertisement';
+import { createAdvertisementByid } from 'features/CreateAdvertisement';
 import { List } from 'shared/ui/List/List';
-
 import { FetchNextAdvertisements } from 'features/FetchNextAdvertisements';
 import { advertisementsPageActions } from 'pages/AdvertisementsPage';
+import { FormDataType } from 'widjets/AdvertisementModal/ui/AdvertisementForm/AdvertisementForm';
+import { AdvertisementModal } from 'widjets/AdvertisementModal';
+
 import {
     fetchNextAdvertisementsPage,
 } from '../../model/services/fetchNextAdvertisementsPage/fetchNextAdvertisementsPage';
@@ -41,16 +43,24 @@ function AdvertisementsPage() {
         dispatch(fetchNextAdvertisementsPage());
     };
 
-    const onOpenModal = useCallback(() => {
+    const onOpenModal = () => {
         setIsOpenModal(true);
-    }, []);
+    };
 
-    const onCloseModal = useCallback(() => {
+    const onCloseModal = () => {
         setIsOpenModal(false);
-    }, []);
+    };
+
+    const onSubmitForm = async (data: FormDataType) => {
+        const response = await dispatch(createAdvertisementByid(data));
+        if (response.meta.requestStatus === 'fulfilled') onCloseModal();
+    };
 
     useEffect(() => {
         dispatch(fetchAdvertisementsList({}));
+        return () => {
+            dispatch(advertisementsPageActions.clearState());
+        };
     }, [dispatch]);
 
     return (
@@ -65,7 +75,12 @@ function AdvertisementsPage() {
                 onClick={onLoadNextAdvertisements}
                 hasMore={hasMore}
             />
-            <CreateAdvertisementModal isOpen={isOpenModal} onClose={onCloseModal} />
+            <AdvertisementModal
+                onSubmit={onSubmitForm}
+                isOpen={isOpenModal}
+                onClose={onCloseModal}
+                mode="create"
+            />
         </section>
     );
 }

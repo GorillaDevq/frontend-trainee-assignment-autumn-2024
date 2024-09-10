@@ -1,21 +1,41 @@
 import { useParams } from 'react-router-dom';
 import { AdvertisementDetails } from 'entities/Advertisement/ui/AdvertisementDetails/AdvertisementDetails';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { Button } from 'shared/ui/Button/Button';
-import { EditAdvertisementModal } from 'features/EditAdvertisement/ui/EditAdvertisementModal/EditAdvertisementModal';
+import { AdvertisementModal, FormDataType } from 'widjets/AdvertisementModal';
+import { useSelector } from 'react-redux';
+import { advertisementDetailsActions, getAdvertisementDetailsData } from 'entities/Advertisement';
+import {
+    editAdvertisementById,
+} from 'features/EditAdvertisement/model/services/editAdvertisementByid/editAdvertisementByid';
+import { useAppDispatch } from 'shared/hooks/useAppDispatch';
 import cls from './AdvertisementDetailsPage.module.scss';
 
 const AdvertisementDetailsPage = () => {
     const { id } = useParams<{id: string}>();
+
+    const dispatch = useAppDispatch();
+    const advertisement = useSelector(getAdvertisementDetailsData);
+
     const [isOpenModal, setIsOpenModal] = useState(false);
 
-    const onOpenModal = useCallback(() => {
+    const onOpenModal = () => {
         setIsOpenModal(true);
-    }, []);
+    };
 
-    const onCloseModal = useCallback(() => {
+    const onCloseModal = () => {
         setIsOpenModal(false);
-    }, []);
+    };
+
+    const onSubmitForm = async (data: FormDataType) => {
+        if (advertisement && advertisement.id) {
+            const response = await dispatch(editAdvertisementById({ id: advertisement.id, ...data }));
+            if (response.meta.requestStatus === 'fulfilled') {
+                dispatch(advertisementDetailsActions.setNewDetails(response.meta.arg));
+                onCloseModal();
+            }
+        }
+    };
 
     if (!id) {
         return (
@@ -29,7 +49,12 @@ const AdvertisementDetailsPage = () => {
         <section className={cls.page}>
             <Button className={cls.page__edit} onClick={onOpenModal}>Редактировать</Button>
             <AdvertisementDetails id={id} />
-            <EditAdvertisementModal isOpen={isOpenModal} onClose={onCloseModal} />
+            <AdvertisementModal
+                isOpen={isOpenModal}
+                onClose={onCloseModal}
+                onSubmit={onSubmitForm}
+                mode="edit"
+            />
         </section>
     );
 };

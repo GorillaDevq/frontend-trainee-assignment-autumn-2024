@@ -41,6 +41,9 @@ const advertisementsPageSlice = createSlice({
         setSearch: (state, action: PayloadAction<string>) => {
             state.search = action.payload;
         },
+        clearState: (state) => {
+            Object.assign(state, initialState);
+        },
     },
     extraReducers: (builder) => {
         builder

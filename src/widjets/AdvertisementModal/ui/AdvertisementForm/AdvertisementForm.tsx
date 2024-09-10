@@ -1,13 +1,13 @@
 import { useForm } from 'react-hook-form';
-import { useAppDispatch } from 'shared/hooks/useAppDispatch';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 import { InputField } from 'shared/ui/InputField/InputField';
 import { Button } from 'shared/ui/Button/Button';
-import {
-    createAdvertisementByid,
-} from 'features/CreateAdvertisement/model/services/createAdvertisementByid/createAdvertisementByid';
-import cls from './CreateAdvertisementForm.module.scss';
+import { getFormIsLoading } from 'entities/Form';
+import { getAdvertisementDetailsData } from 'entities/Advertisement';
+import cls from './AdvertisementForm.module.scss';
 
-type FormDataType = {
+export type FormDataType = {
     imageUrl: string;
     name: string;
     description: string;
@@ -15,22 +15,34 @@ type FormDataType = {
 }
 
 type EditAdvertisementFormProps = {
-    className?: string;
-    onClose: () => void;
+    mode: 'create' | 'edit';
+    onSubmit: (data: FormDataType) => Promise<void>;
 }
 
-export const CreateAdvertisementForm = ({ className, onClose }:EditAdvertisementFormProps) => {
-    const dispatch = useAppDispatch();
+export const AdvertisementForm = ({
+    mode,
+    onSubmit,
+}:EditAdvertisementFormProps) => {
+    const isLoading = useSelector(getFormIsLoading);
+    const advertisement = useSelector(getAdvertisementDetailsData);
 
     const {
-        register, handleSubmit, formState: { errors },
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors },
     } = useForm<FormDataType>();
-    const isLoading = false;
 
-    const onSubmit = async (data: FormDataType) => {
-        const response = await dispatch(createAdvertisementByid(data));
-        if (response.meta.requestStatus === 'fulfilled') onClose();
-    };
+    useEffect(() => {
+        if (mode === 'edit' && advertisement) {
+            reset({
+                imageUrl: advertisement.imageUrl || '',
+                name: advertisement.name || '',
+                description: advertisement.description || '',
+                price: advertisement.price || 0,
+            });
+        }
+    }, [mode, advertisement, reset]);
 
     return (
         <form className={cls.form} onSubmit={handleSubmit(onSubmit)}>

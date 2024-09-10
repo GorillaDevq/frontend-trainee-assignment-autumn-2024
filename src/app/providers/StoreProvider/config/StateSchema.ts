@@ -1,15 +1,13 @@
 import { AxiosInstance } from 'axios';
 import { AppDispatch } from 'app/providers/StoreProvider';
 import { AdvertisementDetailsSchema } from 'entities/Advertisement';
-import { EditAdvertisementSchema } from 'features/EditAdvertisement/model/types/editAdvertisementSchema';
 import { AdvertisementPageSchema } from 'pages/AdvertisementsPage';
-import { CreateAdvertisementSchema } from 'features/CreateAdvertisement';
+import { FormSchema } from 'entities/Form';
 
 export type StateSchema = {
     advertisementDetails: AdvertisementDetailsSchema;
-    advertisementToEdit: EditAdvertisementSchema;
-    advertisementToCreate: CreateAdvertisementSchema;
     advertisementsPage: AdvertisementPageSchema;
+    form: FormSchema;
 }
 
 export type ThunkExtraArg = {

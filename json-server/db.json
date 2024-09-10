@@ -94,7 +94,7 @@
       "imageUrl": "https://sun9-20.userapi.com/impg/ICBpJQ6DTpooRLetoEhogNO774RS-A_gEj740w/IxfnvuNCS_M.jpg?size=774x519&quality=96&sign=4c26f9988df9431634b645a07c23a62a&type=album",
       "name": "Самурай",
       "description": "Самурай",
-      "price": 50,
+      "price": 600,
       "id": "9"
     },
     {
@@ -104,7 +104,7 @@
       "imageUrl": "https://sun9-20.userapi.com/impg/ICBpJQ6DTpooRLetoEhogNO774RS-A_gEj740w/IxfnvuNCS_M.jpg?size=774x519&quality=96&sign=4c26f9988df9431634b645a07c23a62a&type=album",
       "name": "Самурай",
       "description": "Самурай",
-      "price": 50,
+      "price": 51,
       "id": "10"
     },
     {
@@ -137,7 +137,6 @@
       "price": 50,
       "id": "13"
     }
-
   ],
   "orders": [
     {
