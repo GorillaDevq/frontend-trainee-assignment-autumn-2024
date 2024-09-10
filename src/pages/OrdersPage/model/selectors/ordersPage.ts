@@ -2,6 +2,8 @@ import { StateSchema } from 'app/providers/StoreProvider';
 
 export const getOrdersPageData = (state: StateSchema) => state
     .ordersPage?.listData;
+export const getOrderItemsPage = (state: StateSchema) => state
+    .ordersPage?.orderItemsDetails;
 export const getOrdersPageIsLoading = (state: StateSchema) => state
     .ordersPage?.isLoading;
 export const getOrdersPageError = (state: StateSchema) => state

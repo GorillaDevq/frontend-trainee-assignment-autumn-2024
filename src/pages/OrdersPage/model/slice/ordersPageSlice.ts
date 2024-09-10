@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { fetchOrderDetails } from 'pages/OrdersPage/model/services/fetchOrderDetails/fetchOrderDetails';
 import {
     fetchOrdersList,
 } from '../services/fetchOrdersList/fetchOrdersList';
@@ -8,6 +9,7 @@ const initialState: OrdersPageSchema = {
     isLoading: false,
     error: undefined,
     listData: [],
+    orderItemsDetails: [],
     // для сортировки
     sort: '',
     order: 'asc',
@@ -52,6 +54,10 @@ const ordersPageSlice = createSlice({
             .addCase(fetchOrdersList.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.payload;
+            })
+            .addCase(fetchOrderDetails.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.orderItemsDetails = action.payload;
             });
     },
 });

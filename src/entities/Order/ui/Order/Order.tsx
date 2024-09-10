@@ -1,17 +1,19 @@
 import { classNames } from 'shared/lib/classNames/classNames';
 import { formatDate } from 'shared/lib/formatDate/formatDate';
 import { Button } from 'shared/ui/Button/Button';
-import cls from './OrderItem.module.scss';
+import cls from './Order.module.scss';
 import { getOrderStatusString } from '../../lib/getOrderStatusString';
 
 type OrderItemProps = {
     className?: string;
     order: Order;
+    onClick: (id: string) => void;
 }
 
-export const OrderItem = ({
+export const Order = ({
     className,
     order,
+    onClick,
 }:OrderItemProps) => {
     const {
         id,
@@ -34,7 +36,11 @@ export const OrderItem = ({
             </ul>
             <div>
                 <Button type="button">Завершить</Button>
-                <Button type="button">Посмотреть товары</Button>
+                <Button
+                    onClick={() => onClick(id)}
+                    type="button"
+                >Посмотреть товары
+                </Button>
             </div>
         </div>
     );

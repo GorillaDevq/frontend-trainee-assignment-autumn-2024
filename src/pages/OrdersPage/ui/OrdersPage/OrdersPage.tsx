@@ -1,14 +1,17 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppDispatch } from 'shared/hooks/useAppDispatch';
 import { List } from 'shared/ui/List/List';
 import { useSelector } from 'react-redux';
 import { SortOrdersPanel } from 'features/SortOrders';
-import { OrderItem } from 'entities/Order';
+import { Order } from 'entities/Order';
 
 import { useDebounce } from 'shared/hooks/useDebounce';
+import { OrderDetailsModal } from 'widjets/OrderDetailsModal/ui/OrderDetailsModal';
+import { fetchOrderDetails } from 'pages/OrdersPage/model/services/fetchOrderDetails/fetchOrderDetails';
 import { ordersPageActions } from '../../model/slice/ordersPageSlice';
 import { fetchOrdersList } from '../../model/services/fetchOrdersList/fetchOrdersList';
 import {
+    getOrderItemsPage,
     getOrdersPageData,
     getOrdersPageOrder,
     getOrdersPageSort,
@@ -17,14 +20,41 @@ import {
 function OrdersPage() {
     const dispatch = useAppDispatch();
     const orders = useSelector(getOrdersPageData);
+    const orderItems = useSelector(getOrderItemsPage);
     const sort = useSelector(getOrdersPageSort);
     const order = useSelector(getOrdersPageOrder);
 
-    const fetchData = () => {
+    const [isOpenModal, setIsOpenModal] = useState(false);
+
+    const fetchOrdersData = () => {
         dispatch(fetchOrdersList({ replace: true }));
     };
 
-    const debouncedFetchData = useDebounce(fetchData, 500);
+    const debouncedFetchOrders = useDebounce(fetchOrdersData, 500);
+
+    const onOpenModal = async (id: string) => {
+        await dispatch(fetchOrderDetails(id));
+        setIsOpenModal(true);
+    };
+
+    const onCloseModal = () => {
+        setIsOpenModal(false);
+    };
+
+    const onChangeSort = (newSort: string) => {
+        dispatch(ordersPageActions.setSort(newSort));
+        debouncedFetchOrders();
+    };
+
+    const onChangeOrder = (newSort: string) => {
+        dispatch(ordersPageActions.setOrder(newSort));
+        debouncedFetchOrders();
+    };
+
+    const onClickStatus = (newStatus: number) => {
+        dispatch(ordersPageActions.setStatus(newStatus));
+        debouncedFetchOrders();
+    };
 
     useEffect(() => {
         dispatch(fetchOrdersList({}));
@@ -32,21 +62,6 @@ function OrdersPage() {
             dispatch(ordersPageActions.clearState());
         };
     }, [dispatch]);
-
-    const onChangeSort = (newSort: string) => {
-        dispatch(ordersPageActions.setSort(newSort));
-        debouncedFetchData();
-    };
-
-    const onChangeOrder = (newSort: string) => {
-        dispatch(ordersPageActions.setOrder(newSort));
-        debouncedFetchData();
-    };
-
-    const onClickStatus = (newStatus: number) => {
-        dispatch(ordersPageActions.setStatus(newStatus));
-        debouncedFetchData();
-    };
 
     return (
         <section>
@@ -61,9 +76,14 @@ function OrdersPage() {
                 itemsToRender={orders}
                 renderFunction={(order) => (
                     <li key={order.id}>
-                        <OrderItem order={order} />
+                        <Order order={order} onClick={onOpenModal} />
                     </li>
                 )}
+            />
+            <OrderDetailsModal
+                isOpen={isOpenModal}
+                onClose={onCloseModal}
+                orderItems={orderItems}
             />
         </section>
     );
