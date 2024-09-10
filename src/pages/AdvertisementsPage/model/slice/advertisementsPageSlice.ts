@@ -53,7 +53,6 @@ const advertisementsPageSlice = createSlice({
                 action,
             ) => {
                 state.isLoading = false;
-                state.hasMore = action.payload.length >= state.endNumberToRender;
 
                 if (action.meta.arg.replace) {
                     state.listData = action.payload;
@@ -62,6 +61,7 @@ const advertisementsPageSlice = createSlice({
                 } else {
                     state.listData = [...state.listData, ...action.payload];
                 }
+                state.hasMore = action.payload.length >= state.endNumberToRender;
             })
             .addCase(fetchAdvertisementsList.rejected, (state, action) => {
                 state.isLoading = false;

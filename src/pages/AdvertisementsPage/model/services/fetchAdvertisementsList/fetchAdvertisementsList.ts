@@ -2,10 +2,12 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from 'app/providers/StoreProvider';
 import { Advertisement } from 'entities/Advertisement';
 import {
-    getAdvertisementPageAmountToRender, getAdvertisementPageEndNumberToRender,
+    getAdvertisementPageAmountToRender,
+    getAdvertisementPageEndNumberToRender,
     getAdvertisementPageOrder,
     getAdvertisementPageSearch,
-    getAdvertisementPageSort, getAdvertisementPageStartNumberToRender,
+    getAdvertisementPageSort,
+    getAdvertisementPageStartNumberToRender,
 } from '../../selectors/advertisementsPage';
 
 type fetchAdvertisementsListProps = {
@@ -20,7 +22,7 @@ export const fetchAdvertisementsList = createAsyncThunk<
     'advertisementsPage/fetchAdvertisementsList',
     async (props, thunkApi) => {
         const {
-            extra, rejectWithValue, getState, dispatch,
+            extra, rejectWithValue, getState,
         } = thunkApi;
         const sort = getAdvertisementPageSort(getState());
         const order = getAdvertisementPageOrder(getState());
