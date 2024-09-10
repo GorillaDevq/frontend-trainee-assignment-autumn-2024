@@ -1,9 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
     fetchAdvertisementById,
-} from '../services/fetchAdvertisementByid/fetchAdvertisementByid';
-import { Advertisement } from '../types/advertisement';
-import { AdvertisementDetailsSchema } from '../types/advertisementSchema';
+} from '../services/fetchAdvertisementById/fetchAdvertisementById';
+import { AdvertisementDetailsSchema } from '../types/advertisementDetailsSchema';
 
 const initialState: AdvertisementDetailsSchema = {
     isLoading: false,
@@ -22,6 +21,9 @@ const advertisementDetailsSlice = createSlice({
                     ...payload,
                 };
             }
+        },
+        resetState: (state) => {
+            Object.assign(state, initialState);
         },
     },
     extraReducers: (builder) => {

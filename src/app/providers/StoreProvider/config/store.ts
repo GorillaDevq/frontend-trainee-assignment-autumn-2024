@@ -6,12 +6,16 @@ import { $api } from 'shared/api/api';
 import { advertisementDetailsReducer } from 'entities/Advertisement';
 import { advertisementsPageReducer } from 'pages/AdvertisementsPage';
 import { formReducer } from 'entities/Form';
+import { ordersPageReducer } from 'pages/OrdersPage';
+import { orderDetailsReducer } from 'entities/Order';
 import { StateSchema, ThunkExtraArg } from './StateSchema';
 
 export const createReduxStore = () => {
     const reducer: ReducersMapObject<StateSchema> = {
         advertisementDetails: advertisementDetailsReducer,
         advertisementsPage: advertisementsPageReducer,
+        orderDetails: orderDetailsReducer,
+        ordersPage: ordersPageReducer,
         form: formReducer,
     };
 

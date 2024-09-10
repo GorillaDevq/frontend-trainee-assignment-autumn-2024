@@ -1,6 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from 'app/providers/StoreProvider';
-import { Advertisement } from 'entities/Advertisement';
 import { formActions } from 'entities/Form';
 import { ERROR_MESSAGE } from 'shared/const/common';
 

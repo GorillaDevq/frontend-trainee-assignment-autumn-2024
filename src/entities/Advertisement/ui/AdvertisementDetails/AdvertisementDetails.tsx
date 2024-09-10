@@ -3,9 +3,10 @@ import { useSelector } from 'react-redux';
 import { useAppDispatch } from 'shared/hooks/useAppDispatch';
 import { classNames } from 'shared/lib/classNames/classNames';
 
+import { advertisementDetailsActions } from 'entities/Advertisement';
 import {
     fetchAdvertisementById,
-} from '../../model/services/fetchAdvertisementByid/fetchAdvertisementByid';
+} from '../../model/services/fetchAdvertisementById/fetchAdvertisementById';
 import {
     getAdvertisementDetailsData,
     getAdvertisementDetailsError,
@@ -30,6 +31,9 @@ export const AdvertisementDetails = ({
 
     useEffect(() => {
         dispatch(fetchAdvertisementById(id));
+        return () => {
+            dispatch(advertisementDetailsActions.resetState());
+        };
     }, [dispatch, id]);
 
     let content;

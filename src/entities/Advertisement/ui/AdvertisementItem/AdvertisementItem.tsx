@@ -2,12 +2,10 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import HeartIcon from 'shared/assets/icons/heart.svg';
 import ViewsIcon from 'shared/assets/icons/views.svg';
 import { Icon } from 'shared/ui/Icon/Icon';
-import { Button } from 'shared/ui/Button/Button';
 import { formatNumber } from 'shared/lib/formatNumber/formatNumber';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { RoutePath } from 'shared/config/routeConfig/routeConfig';
 import cls from './AdvertisementItem.module.scss';
-import { Advertisement } from '../../model/types/advertisement';
 
 type AdvertisementItemProps = {
     className?: string;
@@ -27,12 +25,6 @@ export const AdvertisementItem = ({
         id,
     } = advertisement;
 
-    const navigate = useNavigate();
-
-    const onClickHandler = () => {
-        navigate(RoutePath.advertisements_details + id);
-    };
-
     return (
         <div className={classNames(cls.advertisement, {}, [className])}>
             <img className={cls.advertisement__image} src={imageUrl} alt={name} />
@@ -48,13 +40,12 @@ export const AdvertisementItem = ({
                     <Icon Svg={HeartIcon} text={formatNumber(likes)} />
                 </li>
             </ul>
-            <Button
+            <Link
                 className={cls.button}
-                type="button"
-                onClick={onClickHandler}
+                to={RoutePath.advertisements_details + id}
             >
                 Подробнее
-            </Button>
+            </Link>
         </div>
     );
 };

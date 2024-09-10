@@ -1,4 +1,4 @@
-import { Advertisement, AdvertisementItem } from 'entities/Advertisement';
+import { AdvertisementItem } from 'entities/Advertisement';
 
 export const renderAdvertisementsListItem = (props: Advertisement) => (
     <li key={props.id}>

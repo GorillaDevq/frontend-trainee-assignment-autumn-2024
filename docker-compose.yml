@@ -13,6 +13,5 @@ services:
       context: .
       dockerfile: docker/json-server/Dockerfile
     working_dir: /json-server
-    command: json-server --watch db.json --port 3000
     ports:
       - "3000:3000"

@@ -14,7 +14,7 @@ const initialState: AdvertisementPageSchema = {
     startNumberToRender: 0,
     hasMore: true,
     // для сортировки
-    sort: 'price',
+    sort: '',
     search: '',
     order: 'asc',
 };

@@ -1,5 +1,11 @@
-import React, { ErrorInfo, ReactNode, Suspense } from 'react';
+import {
+    ErrorInfo,
+    Component,
+    ReactNode,
+    Suspense,
+} from 'react';
 import { ErrorPage } from 'pages/ErrorPage';
+import { Loader } from 'shared/ui/Loader/Loader';
 
 type ErrorBoundaryProps = {
     children: ReactNode;
@@ -9,7 +15,7 @@ type ErrorBoundaryState = {
     hasError: boolean;
 }
 
-class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
+class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     constructor(props: ErrorBoundaryProps) {
         super(props);
         this.state = { hasError: false };
@@ -28,7 +34,7 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
         const { children } = this.props;
         if (hasError) {
             return (
-                <Suspense fallback="Loading...">
+                <Suspense fallback={<Loader />}>
                     <ErrorPage />
                 </Suspense>
             );
