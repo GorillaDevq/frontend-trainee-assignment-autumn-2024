@@ -3,7 +3,7 @@ import { classNames } from 'shared/lib/classNames/classNames';
 import { ReactNode } from 'react';
 import cls from './List.module.scss';
 
-type ListWithInfinityScrollProps<T> = {
+type ListProps<T> = {
     className?: string;
     itemsToRender: Array<T>;
     renderFunction: (item: T) => ReactNode;
@@ -13,7 +13,7 @@ export const List = <T, >({
     className,
     itemsToRender,
     renderFunction,
-}: ListWithInfinityScrollProps<T>) => {
+}: ListProps<T>) => {
     return (
         <ul
             className={classNames(cls.list, {}, [className])}

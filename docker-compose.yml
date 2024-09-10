@@ -12,6 +12,5 @@ services:
     build:
       context: .
       dockerfile: docker/json-server/Dockerfile
-    working_dir: /json-server
     ports:
       - "3000:3000"

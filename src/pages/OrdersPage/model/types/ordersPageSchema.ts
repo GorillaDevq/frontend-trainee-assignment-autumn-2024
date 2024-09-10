@@ -1,7 +1,7 @@
 export type OrdersPageSchema = {
     isLoading: boolean;
     error?: string;
-    listData: Advertisement[];
+    listData: Order[];
     // Фильтры
     order: string;
     sort: string;

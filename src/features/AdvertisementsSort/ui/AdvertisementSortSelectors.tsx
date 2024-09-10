@@ -46,16 +46,13 @@ export const AdvertisementSortSelectors = ({
                 value={sort}
                 onChange={changeSortHandler}
             />
-            {__PROJECT__ === 'development'
-                && (
-                    <Select
-                        options={ORDER_OPTIONS}
-                        label="по"
-                        value={order}
-                        onChange={changeOrderHandler}
-                        readonly={!sort.length}
-                    />
-                )}
+            <Select
+                options={ORDER_OPTIONS}
+                label="по"
+                value={order}
+                onChange={changeOrderHandler}
+                readonly={!sort.length}
+            />
             <Select
                 options={AMOUNT_OPTIONS}
                 label="Количество"

@@ -12,7 +12,7 @@ type fetchOrdersListProps = {
 }
 
 export const fetchOrdersList = createAsyncThunk<
-    Advertisement[],
+    Order[],
     fetchOrdersListProps,
     ThunkConfig<string>
 >(
@@ -26,7 +26,7 @@ export const fetchOrdersList = createAsyncThunk<
         const order = getAdvertisementPageOrder(getState());
 
         try {
-            const response = await extra.api.get<Advertisement[]>('/orders', {
+            const response = await extra.api.get<Order[]>('/orders', {
                 params: {
                     _sort: sort,
                     _order: order,

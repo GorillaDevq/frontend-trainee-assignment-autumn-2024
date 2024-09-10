@@ -1,11 +1,11 @@
 import { StateSchema } from 'app/providers/StoreProvider';
 
 export const getOrdersPageData = (state: StateSchema) => state
-    .advertisementsPage?.listData;
+    .ordersPage?.listData;
 export const getOrdersPageIsLoading = (state: StateSchema) => state
-    .advertisementsPage?.isLoading;
+    .ordersPage?.isLoading;
 export const getOrdersPageError = (state: StateSchema) => state
-    .advertisementsPage?.error;
+    .ordersPage?.error;
 // Сортировка
-export const getAdvertisementPageOrder = (state: StateSchema) => state.advertisementsPage?.order;
-export const getAdvertisementPageSort = (state: StateSchema) => state.advertisementsPage?.sort;
+export const getAdvertisementPageOrder = (state: StateSchema) => state.ordersPage?.order;
+export const getAdvertisementPageSort = (state: StateSchema) => state.ordersPage?.sort;
