@@ -12,7 +12,7 @@ const OrderStatusMap = {
     [OrderStatus.Created]: 'Создан',
     [OrderStatus.Paid]: 'Оплачен',
     [OrderStatus.Transport]: 'В пути',
-    [OrderStatus.DeliveredToThePoint]: 'Доставлен в СРЦ',
+    [OrderStatus.DeliveredToThePoint]: 'В СРЦ',
     [OrderStatus.Received]: 'Получен',
     [OrderStatus.Archived]: 'Архив',
     [OrderStatus.Refund]: 'Возврат',

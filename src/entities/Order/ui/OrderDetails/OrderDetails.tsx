@@ -16,8 +16,8 @@ export const OrderDetails = ({
         to={`${RoutePath.advertisements_details}${orderItem?.id}`}
         className={classNames(cls.order, {}, [className])}
     >
-        <h3>{orderItem?.name}</h3>
-        <span>{orderItem?.count}</span>
+        <h3 className={cls.order__name}>Товар: {orderItem?.name}</h3>
+        <span>Количество: {orderItem?.count}</span>
         <img
             className={cls.order__image}
             src={orderItem?.imageUrl}

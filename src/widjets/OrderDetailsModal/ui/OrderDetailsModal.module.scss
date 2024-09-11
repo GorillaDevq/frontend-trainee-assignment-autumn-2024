@@ -1,15 +1,15 @@
 .modal {
 
     &__container {
-        width: 500px;
-        min-height: 400px;
+        width: 800px;
+        min-height: 340px;
         padding: 20px;
         box-sizing: border-box;
         border-radius: 20px;
         background-color: #fff;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
         gap: 20px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-auto-rows: 300px;
     }
 }
