@@ -59,6 +59,7 @@ const advertisementsPageSlice = createSlice({
             })
             .addCase(fetchAdvertisementsList.rejected, (state, action) => {
                 state.isLoading = false;
+                state.listData = [];
                 state.error = action.payload;
             });
     },

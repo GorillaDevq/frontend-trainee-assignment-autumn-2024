@@ -21,8 +21,10 @@ import {
 import cls from './AdvertisementsPage.module.scss';
 import {
     getAdvertisementPageData,
+    getAdvertisementPageError,
     getAdvertisementPageIsLoading,
-    getAdvertisementPageLimit, getAdvertisementPageNum,
+    getAdvertisementPageLimit,
+    getAdvertisementPageNum,
     getAdvertisementPageTotal,
 } from '../../model/selectors/advertisementsPage';
 import { renderAdvertisementsListItem } from '../../lib/renderAdvertisementsListItem';
@@ -30,6 +32,7 @@ import { renderAdvertisementsListItem } from '../../lib/renderAdvertisementsList
 function AdvertisementsPage() {
     const dispatch = useAppDispatch();
 
+    const error = useSelector(getAdvertisementPageError);
     const isLoading = useSelector(getAdvertisementPageIsLoading);
     const advertisements = useSelector(getAdvertisementPageData);
     const limit = useSelector(getAdvertisementPageLimit);
@@ -90,6 +93,7 @@ function AdvertisementsPage() {
                 renderFunction={renderAdvertisementsListItem}
                 isLoading={isLoading}
                 Skeleton={AdvertisementItemSkeleton}
+                error={error}
             />
             {isOpenModal && (
                 <AdvertisementModal

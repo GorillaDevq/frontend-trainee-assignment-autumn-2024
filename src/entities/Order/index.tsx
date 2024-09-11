@@ -1,3 +1,4 @@
+export { getOrderError } from './model/selectors/order';
 export { deleteOrderById } from './model/services/deleteOrderById/deleteOrderById';
 export { OrderSkeleton } from './ui/OrderSkeleton/OrderSkeleton';
 export { OrderDetails } from './ui/OrderDetails/OrderDetails';

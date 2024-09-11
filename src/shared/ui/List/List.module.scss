@@ -1,9 +1,16 @@
 .list {
     @include list_reset;
     padding-bottom: 30px;
+
     &__not {
         text-align: center;
         color: $primary-color;
         grid-column: 2;
     }
+}
+
+.error {
+    text-align: center;
+    font-size: $font_text_xl;
+    color: $primary-error;
 }

@@ -11,6 +11,7 @@ type SortOrdersPanelProps = {
     className?: string;
     sort: string;
     order: string;
+    status: number;
     onChangeOrder: (newOrder: string) => void;
     onChangeSort: (newSort: string) => void;
     onClickStatus: (newStatus: number) => void;
@@ -20,28 +21,29 @@ export const SortOrdersPanel = ({
     className,
     sort,
     order,
+    status,
     onChangeOrder,
     onChangeSort,
     onClickStatus,
 }: SortOrdersPanelProps) => (
     <div className={classNames(cls.list, {}, [className])}>
         <Button
+            theme={status === -1 ? ButtonTheme.SECONDARY : ButtonTheme.PRIMARY}
             onClick={() => onClickStatus(RESET_STATUS)}
         >
             Сбросить статус
         </Button>
         <div className={cls.buttons}>
-            {SORT_BUTTONS_STATUS.map((status) => (
+            {SORT_BUTTONS_STATUS.map((btnStatus) => (
                 <Button
-                    theme={ButtonTheme.SECONDARY}
-                    onClick={() => onClickStatus(status)}
-                    key={status}
+                    theme={status === btnStatus ? ButtonTheme.SECONDARY : ButtonTheme.PRIMARY}
+                    onClick={() => onClickStatus(btnStatus)}
+                    key={btnStatus}
                 >
-                    {getOrderStatusString(status)}
+                    {getOrderStatusString(btnStatus)}
                 </Button>
             ))}
         </div>
-
         <div className={cls.container}>
             <Select
                 options={SORT_FIELD_OPTIONS}

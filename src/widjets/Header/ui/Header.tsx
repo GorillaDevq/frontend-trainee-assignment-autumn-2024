@@ -5,16 +5,21 @@ import cls from './Header.module.scss';
 
 export const Header = () => (
     <header className={cls.header}>
-        <LogoIcon className={cls.image} />
-        <nav className={cls.nav}>
+        <nav className={cls.header__nav}>
             <Link
-                className={cls.link}
+                className={cls.header__link}
+                to={RoutePath.advertisements}
+            >
+                <LogoIcon />
+            </Link>
+            <Link
+                className={cls.header__link}
                 to={RoutePath.orders}
             >
                 Заказы
             </Link>
             <Link
-                className={cls.link}
+                className={cls.header__link}
                 to={RoutePath.advertisements}
             >
                 Объявления

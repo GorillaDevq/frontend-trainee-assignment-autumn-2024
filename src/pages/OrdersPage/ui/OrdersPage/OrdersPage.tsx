@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { SortOrdersPanel } from 'features/SortOrders';
 import { deleteOrderById, Order, OrderSkeleton } from 'entities/Order';
 import { useDebounce } from 'shared/hooks/useDebounce';
-import { OrderDetailsModal } from 'widjets/OrderDetailsModal/ui/OrderDetailsModal';
+import { OrderDetailsModal } from 'widjets/OrderDetailsModal';
 import { useAbortControllerManager } from 'shared/hooks/useAbortControllerManager';
 import { PagePagination } from 'widjets/PagePagination';
 
@@ -15,11 +15,13 @@ import { fetchOrdersList } from '../../model/services/fetchOrdersList/fetchOrder
 import {
     getOrderItemsPage,
     getOrdersPageData,
+    getOrdersPageError,
     getOrdersPageIsLoading,
     getOrdersPageLimit,
     getOrdersPageNum,
     getOrdersPageOrder,
     getOrdersPageSort,
+    getOrdersPageStatus,
     getOrdersPageTotalData,
 } from '../../model/selectors/ordersPage';
 import cls from './OrdersPage.module.scss';
@@ -27,6 +29,7 @@ import cls from './OrdersPage.module.scss';
 function OrdersPage() {
     const dispatch = useAppDispatch();
 
+    const error = useSelector(getOrdersPageError);
     const isLoading = useSelector(getOrdersPageIsLoading);
     const orders = useSelector(getOrdersPageData);
     const orderItems = useSelector(getOrderItemsPage);
@@ -35,6 +38,7 @@ function OrdersPage() {
     const limit = useSelector(getOrdersPageLimit);
     const page = useSelector(getOrdersPageNum);
     const totalData = useSelector(getOrdersPageTotalData);
+    const status = useSelector(getOrdersPageStatus);
 
     const [isOpenModal, setIsOpenModal] = useState(false);
 
@@ -101,6 +105,7 @@ function OrdersPage() {
             <SortOrdersPanel
                 sort={sort}
                 order={order}
+                status={status}
                 onChangeOrder={onChangeOrder}
                 onChangeSort={onChangeSort}
                 onClickStatus={onClickStatus}
@@ -123,6 +128,7 @@ function OrdersPage() {
                     </li>
                 )}
                 isLoading={isLoading}
+                error={error}
                 Skeleton={OrderSkeleton}
                 className={cls.page__list}
             />
