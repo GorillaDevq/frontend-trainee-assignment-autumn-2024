@@ -3,57 +3,60 @@ import { ThunkConfig } from 'app/providers/StoreProvider';
 import { advertisementsPageActions } from 'pages/AdvertisementsPage';
 import { ERROR_MESSAGE } from 'shared/const/common';
 import {
-    getAdvertisementPageAmountToRender,
-    getAdvertisementPageEndNumberToRender,
+    getAdvertisementPageLimit,
+    getAdvertisementPageNum,
     getAdvertisementPageOrder,
     getAdvertisementPageSearch,
     getAdvertisementPageSort,
-    getAdvertisementPageStartNumberToRender,
 } from '../../selectors/advertisementsPage';
 
-type fetchAdvertisementsListProps = {
+type fetchAdvertisementsListPayload = {
     replace?: boolean;
     signal?: AbortSignal;
 }
 
 export const fetchAdvertisementsList = createAsyncThunk<
-    Advertisement[],
-    fetchAdvertisementsListProps,
+    {
+        totalCount: number;
+        data: Advertisement[];
+    },
+    fetchAdvertisementsListPayload,
     ThunkConfig<string>
 >(
     'advertisementsPage/fetchAdvertisementsList',
-    async (props, thunkApi) => {
+    async (payload, thunkApi) => {
         const {
             extra, rejectWithValue, getState, dispatch,
         } = thunkApi;
         const sort = getAdvertisementPageSort(getState());
-        const order = getAdvertisementPageOrder(getState());
         const name = getAdvertisementPageSearch(getState());
-        const amount = getAdvertisementPageAmountToRender(getState());
-        let start = getAdvertisementPageStartNumberToRender(getState());
-        let limit = getAdvertisementPageEndNumberToRender(getState());
+        const order = getAdvertisementPageOrder(getState());
+        const limit = getAdvertisementPageLimit(getState());
+        let page = getAdvertisementPageNum(getState());
 
         try {
-            if (props.replace) {
-                start = 0;
-                limit = amount;
+            if (payload.replace) {
+                page = 1;
+                dispatch(advertisementsPageActions.setPage(page));
                 dispatch(advertisementsPageActions.setNewData([]));
             }
 
             const response = await extra.api.get<Advertisement[]>('/advertisements', {
                 params: {
-                    _start: start,
+                    _page: page,
                     _limit: limit,
                     _sort: sort,
                     _order: order,
                     ...(name?.length > 0 && { name }),
                 },
-                signal: props.signal,
+                signal: payload.signal,
             });
+
+            const totalCount = Number(response.headers['x-total-count']);
 
             if (!response.data) throw new Error();
 
-            return response.data;
+            return { totalCount, data: response.data };
         } catch (err) {
             return rejectWithValue(ERROR_MESSAGE);
         }

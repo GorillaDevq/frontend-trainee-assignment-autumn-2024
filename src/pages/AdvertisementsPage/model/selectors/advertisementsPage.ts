@@ -7,14 +7,13 @@ export const getAdvertisementPageIsLoading = (state: StateSchema) => state
 export const getAdvertisementPageError = (state: StateSchema) => state
     .advertisementsPage?.error;
 // Пагинация
-export const getAdvertisementPageAmountToRender = (state: StateSchema) => state
-    .advertisementsPage?.amountToRender;
-export const getAdvertisementPageEndNumberToRender = (state: StateSchema) => state
-    .advertisementsPage?.endNumberToRender;
-export const getAdvertisementPageStartNumberToRender = (state: StateSchema) => state
-    .advertisementsPage?.startNumberToRender;
-export const getAdvertisementPageHasMore = (state: StateSchema) => state
-    .advertisementsPage?.hasMore;
+export const getAdvertisementPageLimit = (state: StateSchema) => state
+    .advertisementsPage?.limit;
+export const getAdvertisementPageNum = (state: StateSchema) => state
+    .advertisementsPage?.page;
+export const getAdvertisementPageTotal = (state: StateSchema) => state
+    .advertisementsPage?.totalCount;
+
 // Сортировка
 export const getAdvertisementPageOrder = (state: StateSchema) => state.advertisementsPage?.order;
 export const getAdvertisementPageSort = (state: StateSchema) => state.advertisementsPage?.sort;
