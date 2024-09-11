@@ -1,0 +1,12 @@
+.list {
+    @include list_reset;
+    display: flex;
+    column-gap: 10px;
+    padding-bottom: 50px;
+    align-self: center;
+
+    &__item {
+        display: flex;
+        align-items: center;
+    }
+}

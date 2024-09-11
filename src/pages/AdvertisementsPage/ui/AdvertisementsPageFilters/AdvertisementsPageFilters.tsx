@@ -7,7 +7,7 @@ import { useAppDispatch } from 'shared/hooks/useAppDispatch';
 import { advertisementsPageActions } from 'pages/AdvertisementsPage';
 import { useDebounce } from 'shared/hooks/useDebounce';
 import {
-    getAdvertisementPageAmountToRender,
+    getAdvertisementPageLimit,
     getAdvertisementPageOrder,
     getAdvertisementPageSort,
 } from '../../model/selectors/advertisementsPage';
@@ -25,7 +25,7 @@ export const AdvertisementsPageFilters = ({
     const dispatch = useAppDispatch();
     const sort = useSelector(getAdvertisementPageSort);
     const order = useSelector(getAdvertisementPageOrder);
-    const amount = useSelector(getAdvertisementPageAmountToRender);
+    const limit = useSelector(getAdvertisementPageLimit);
 
     const fetchAdvertisementsData = () => {
         fetchData(true);
@@ -44,7 +44,8 @@ export const AdvertisementsPageFilters = ({
     };
 
     const onChangeLimit = (newAmount: string) => {
-        dispatch(advertisementsPageActions.setAmountToRender(Number(newAmount)));
+        dispatch(advertisementsPageActions.setLimit(Number(newAmount)));
+        debouncedFetchData();
     };
 
     const onChangeSearch = (newSearch: string) => {
@@ -60,7 +61,7 @@ export const AdvertisementsPageFilters = ({
             <AdvertisementSortSelectors
                 sort={sort}
                 order={order}
-                amount={amount}
+                amount={limit}
                 onChangeOrder={onChangeOrder}
                 onChangeSort={onChangeSort}
                 onChangeAmount={onChangeLimit}
