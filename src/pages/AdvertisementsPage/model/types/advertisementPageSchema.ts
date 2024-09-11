@@ -4,7 +4,7 @@ export type AdvertisementPageSchema = {
     listData: Advertisement[];
     // Пагинация
     page: number;
-    totalCount?: number;
+    totalCount: number;
     limit: number;
     // Фильтры
     order: string;

@@ -1,48 +1,82 @@
-import { useMemo } from 'react';
-import { Button, ButtonTheme } from 'shared/ui/Button/Button';
+import { Button } from 'shared/ui/Button/Button';
 
 import cls from './PagePagination.module.scss';
 
 type PaginationAdvertisementProps = {
-    totalData?: number;
+    totalData: number;
     amount: number;
     page: number;
     onClick: (page: number) => void;
 }
 
 export const PagePagination = ({
-    totalData,
-    amount,
-    page,
-    onClick,
-}:PaginationAdvertisementProps) => {
-    const pageNumbers = useMemo(() => {
-        if (!totalData) return [];
+    totalData, amount, page, onClick,
+}: PaginationAdvertisementProps) => {
+    const totalPages = Math.ceil(totalData / amount);
 
-        const totalPages = Math.ceil(totalData / amount);
+    const handleClick = (page: number) => {
+        if (page > 0 && page <= totalPages) {
+            onClick(page);
+        }
+    };
 
-        return Array.from({ length: totalPages }, (_, index) => index + 1);
-    }, [totalData, amount]);
-
-    if (pageNumbers.length <= 1) {
-        return (
-            <ul className={cls.list} />
-        );
+    if (totalPages <= 1) {
+        return (<div className={cls.list} />);
     }
 
+    const renderPageButtons = () => {
+        const buttons = [];
+
+        if (page !== 1) {
+            buttons.push(
+                <Button key={1} onClick={() => handleClick(1)}>
+                    1
+                </Button>,
+            );
+        }
+
+        if (page > 2) {
+            buttons.push(
+                <Button key={page - 1} onClick={() => handleClick(page - 1)}>
+                    {page - 1}
+                </Button>,
+            );
+        }
+
+        buttons.push(
+            <Button key={page} disabled>
+                {page}
+            </Button>,
+        );
+
+        if (page < totalPages - 1) {
+            buttons.push(
+                <Button key={page + 1} onClick={() => handleClick(page + 1)}>
+                    {page + 1}
+                </Button>,
+            );
+        }
+
+        if (page !== totalPages) {
+            buttons.push(
+                <Button key={totalPages} onClick={() => handleClick(totalPages)}>
+                    {totalPages}
+                </Button>,
+            );
+        }
+
+        return buttons;
+    };
+
     return (
-        <ul className={cls.list}>
-            {pageNumbers.map((num) => (
-                <li className={cls.list__item} key={num}>
-                    <Button
-                        disabled={page === num}
-                        theme={page === num ? ButtonTheme.SECONDARY : ButtonTheme.PRIMARY}
-                        onClick={() => onClick(num)}
-                    >
-                        {num}
-                    </Button>
-                </li>
-            ))}
-        </ul>
+        <div className={cls.list}>
+            <Button onClick={() => handleClick(page - 1)} disabled={page === 1}>
+                &lt;
+            </Button>
+            {renderPageButtons()}
+            <Button onClick={() => handleClick(page + 1)} disabled={page === totalPages}>
+                &gt;
+            </Button>
+        </div>
     );
 };

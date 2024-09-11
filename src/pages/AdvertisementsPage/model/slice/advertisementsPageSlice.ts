@@ -10,7 +10,7 @@ const initialState: AdvertisementPageSchema = {
     listData: [],
     // для пагинации
     page: 1,
-    totalCount: undefined,
+    totalCount: 0,
     limit: 10,
     // для сортировки
     sort: '',

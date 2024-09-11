@@ -28,7 +28,8 @@ export const SortOrdersPanel = ({
 }: SortOrdersPanelProps) => (
     <div className={classNames(cls.list, {}, [className])}>
         <Button
-            theme={status === -1 ? ButtonTheme.SECONDARY : ButtonTheme.PRIMARY}
+            theme={ButtonTheme.PRIMARY}
+            disabled={status === -1}
             onClick={() => onClickStatus(RESET_STATUS)}
         >
             Сбросить статус
@@ -36,7 +37,8 @@ export const SortOrdersPanel = ({
         <div className={cls.buttons}>
             {SORT_BUTTONS_STATUS.map((btnStatus) => (
                 <Button
-                    theme={status === btnStatus ? ButtonTheme.SECONDARY : ButtonTheme.PRIMARY}
+                    theme={ButtonTheme.PRIMARY}
+                    disabled={status === btnStatus}
                     onClick={() => onClickStatus(btnStatus)}
                     key={btnStatus}
                 >

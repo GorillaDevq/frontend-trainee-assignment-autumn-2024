@@ -5,7 +5,7 @@ export type OrdersPageSchema = {
     orderItemsDetails: OrderItem[];
     // Пагинация
     page: number;
-    totalCount?: number;
+    totalCount: number;
     limit: number;
     // Фильтры
     order: string;

@@ -18,6 +18,11 @@
         &:hover {
             background-color: $primary-color-hover;
         }
+
+        &:disabled {
+            pointer-events: none;
+            background-color: $background-primary-color;
+        }
     }
 
     &_secondary, &_red {

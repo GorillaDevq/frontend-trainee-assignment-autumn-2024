@@ -9,9 +9,9 @@ import { List } from 'shared/ui/List/List';
 import { FormDataType, AdvertisementModal } from 'widjets/AdvertisementModal';
 import { AdvertisementItemSkeleton } from 'entities/Advertisement';
 import { useAbortControllerManager } from 'shared/hooks/useAbortControllerManager';
+import { PagePagination } from 'widjets/PagePagination';
 
 import { advertisementsPageActions } from '../../model/slice/advertisementsPageSlice';
-import { PagePagination } from '../../../../widjets/PagePagination';
 import {
     AdvertisementsPageFilters,
 } from '../AdvertisementsPageFilters/AdvertisementsPageFilters';

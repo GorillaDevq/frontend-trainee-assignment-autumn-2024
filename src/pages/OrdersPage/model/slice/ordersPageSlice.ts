@@ -14,7 +14,7 @@ const initialState: OrdersPageSchema = {
     orderItemsDetails: [],
     // для пагинации
     page: 1,
-    totalCount: undefined,
+    totalCount: 0,
     limit: 6,
     // для сортировки
     sort: '',
