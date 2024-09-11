@@ -28,6 +28,9 @@ export const List = <T, >({
                     <Skeleton />
                     <Skeleton />
                     <Skeleton />
+                    <Skeleton />
+                    <Skeleton />
+                    <Skeleton />
                 </>
             )}
             {

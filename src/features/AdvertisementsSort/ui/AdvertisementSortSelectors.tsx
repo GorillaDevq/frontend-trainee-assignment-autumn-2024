@@ -4,7 +4,7 @@ import {
     AMOUNT_OPTIONS,
     ORDER_OPTIONS,
     SORT_FIELD_OPTIONS,
-} from 'features/AdvertisementsSort/lib/config';
+} from '../lib/config';
 import cls from './AdvertisementSortSelectors.module.scss';
 
 type AdvertisementSortSelectorsProps = {

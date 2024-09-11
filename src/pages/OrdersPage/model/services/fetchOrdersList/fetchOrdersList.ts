@@ -4,8 +4,11 @@ import { ERROR_MESSAGE } from 'shared/const/common';
 
 import { ordersPageActions } from 'pages/OrdersPage';
 import {
+    getOrdersPageLimit,
+    getOrdersPageNum,
     getOrdersPageOrder,
-    getOrdersPageSort, getOrdersPageStatus,
+    getOrdersPageSort,
+    getOrdersPageStatus,
 } from '../../selectors/ordersPage';
 
 type fetchOrdersListProps = {
@@ -14,37 +17,47 @@ type fetchOrdersListProps = {
 }
 
 export const fetchOrdersList = createAsyncThunk<
-    Order[],
+    {
+        data: Order[],
+        totalCount: number,
+    },
     fetchOrdersListProps,
     ThunkConfig<string>
 >(
     'ordersPage/fetchOrdersList',
-    async (props, thunkApi) => {
+    async (payload, thunkApi) => {
         const {
             extra, rejectWithValue, getState, dispatch,
         } = thunkApi;
 
         const sort = getOrdersPageSort(getState());
-        const order = getOrdersPageOrder(getState());
         const status = getOrdersPageStatus(getState());
+        const order = getOrdersPageOrder(getState());
+        const limit = getOrdersPageLimit(getState());
+        let page = getOrdersPageNum(getState());
 
         try {
-            if (props.replace) {
-                dispatch(ordersPageActions.setNewData([]));
+            if (payload.replace) {
+                page = 1;
+                dispatch(ordersPageActions.setPage(page));
             }
 
             const response = await extra.api.get<Order[]>('/orders', {
                 params: {
-                    _sort: sort,
                     _order: order,
+                    _page: page,
+                    _sort: sort,
+                    _limit: limit,
                     ...(status !== -1 && { status }),
                 },
-                signal: props.signal,
+                signal: payload.signal,
             });
+
+            const totalCount = Number(response.headers['x-total-count']);
 
             if (!response.data) throw new Error();
 
-            return response.data;
+            return { totalCount, data: response.data };
         } catch (err) {
             return rejectWithValue(ERROR_MESSAGE);
         }

@@ -30,23 +30,22 @@ export const fetchAdvertisementsList = createAsyncThunk<
         } = thunkApi;
         const sort = getAdvertisementPageSort(getState());
         const name = getAdvertisementPageSearch(getState());
-        const order = getAdvertisementPageOrder(getState());
         const limit = getAdvertisementPageLimit(getState());
+        const order = getAdvertisementPageOrder(getState());
         let page = getAdvertisementPageNum(getState());
 
         try {
             if (payload.replace) {
                 page = 1;
                 dispatch(advertisementsPageActions.setPage(page));
-                dispatch(advertisementsPageActions.setNewData([]));
             }
 
             const response = await extra.api.get<Advertisement[]>('/advertisements', {
                 params: {
                     _page: page,
+                    _order: order,
                     _limit: limit,
                     _sort: sort,
-                    _order: order,
                     ...(name?.length > 0 && { name }),
                 },
                 signal: payload.signal,

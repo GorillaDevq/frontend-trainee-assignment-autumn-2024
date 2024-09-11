@@ -8,15 +8,14 @@ const initialState: AdvertisementPageSchema = {
     isLoading: false,
     error: undefined,
     listData: [],
-
     // для пагинации
     page: 1,
     totalCount: undefined,
     limit: 10,
     // для сортировки
     sort: '',
-    search: '',
     order: 'asc',
+    search: '',
 };
 
 const advertisementsPageSlice = createSlice({
@@ -25,9 +24,6 @@ const advertisementsPageSlice = createSlice({
     reducers: {
         setLimit: (state, action) => {
             state.limit = action.payload;
-        },
-        setNewData: (state, action) => {
-            state.listData = action.payload;
         },
         setOrder: (state, action) => {
             state.order = action.payload;
@@ -47,14 +43,9 @@ const advertisementsPageSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(fetchAdvertisementsList.pending, (state, { meta }) => {
+            .addCase(fetchAdvertisementsList.pending, (state) => {
                 state.error = undefined;
                 state.isLoading = true;
-
-                if (meta.arg.replace) {
-                    state.page = 1;
-                    state.listData = [];
-                }
             })
             .addCase(fetchAdvertisementsList.fulfilled, (
                 state,

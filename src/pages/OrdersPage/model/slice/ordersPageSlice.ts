@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { fetchOrderDetails } from 'pages/OrdersPage/model/services/fetchOrderDetails/fetchOrderDetails';
 import { deleteOrderById } from 'entities/Order';
 
@@ -12,6 +12,10 @@ const initialState: OrdersPageSchema = {
     error: undefined,
     listData: [],
     orderItemsDetails: [],
+    // для пагинации
+    page: 1,
+    totalCount: undefined,
+    limit: 6,
     // для сортировки
     sort: '',
     order: 'asc',
@@ -22,13 +26,16 @@ const ordersPageSlice = createSlice({
     name: 'ordersPage',
     initialState,
     reducers: {
-        setOrder: (state, action: PayloadAction<string>) => {
+        setOrder: (state, action) => {
             state.order = action.payload;
         },
-        setSort: (state, action: PayloadAction<string>) => {
+        setPage: (state, action) => {
+            state.page = action.payload;
+        },
+        setSort: (state, action) => {
             state.sort = action.payload;
         },
-        setStatus: (state, action: PayloadAction<number>) => {
+        setStatus: (state, action) => {
             state.status = action.payload;
         },
         clearState: (state) => {
@@ -44,17 +51,10 @@ const ordersPageSlice = createSlice({
                 state.error = undefined;
                 state.isLoading = true;
             })
-            .addCase(fetchOrdersList.fulfilled, (
-                state,
-                action,
-            ) => {
+            .addCase(fetchOrdersList.fulfilled, (state, { payload }) => {
                 state.isLoading = false;
-
-                if (action.meta.arg.replace) {
-                    state.listData = action.payload;
-                } else {
-                    state.listData = [...state.listData, ...action.payload];
-                }
+                state.listData = payload.data;
+                if (state.totalCount !== payload.totalCount) state.totalCount = payload.totalCount;
             })
             .addCase(fetchOrdersList.rejected, (state, action) => {
                 state.isLoading = true;

@@ -7,15 +7,20 @@ import { deleteOrderById, Order, OrderSkeleton } from 'entities/Order';
 import { useDebounce } from 'shared/hooks/useDebounce';
 import { OrderDetailsModal } from 'widjets/OrderDetailsModal/ui/OrderDetailsModal';
 import { useAbortControllerManager } from 'shared/hooks/useAbortControllerManager';
+import { PagePagination } from 'widjets/PagePagination';
 
 import { fetchOrderDetails } from '../../model/services/fetchOrderDetails/fetchOrderDetails';
 import { ordersPageActions } from '../../model/slice/ordersPageSlice';
 import { fetchOrdersList } from '../../model/services/fetchOrdersList/fetchOrdersList';
 import {
     getOrderItemsPage,
-    getOrdersPageData, getOrdersPageIsLoading,
+    getOrdersPageData,
+    getOrdersPageIsLoading,
+    getOrdersPageLimit,
+    getOrdersPageNum,
     getOrdersPageOrder,
     getOrdersPageSort,
+    getOrdersPageTotalData,
 } from '../../model/selectors/ordersPage';
 import cls from './OrdersPage.module.scss';
 
@@ -27,6 +32,9 @@ function OrdersPage() {
     const orderItems = useSelector(getOrderItemsPage);
     const sort = useSelector(getOrdersPageSort);
     const order = useSelector(getOrdersPageOrder);
+    const limit = useSelector(getOrdersPageLimit);
+    const page = useSelector(getOrdersPageNum);
+    const totalData = useSelector(getOrdersPageTotalData);
 
     const [isOpenModal, setIsOpenModal] = useState(false);
 
@@ -57,6 +65,11 @@ function OrdersPage() {
 
     const onCloseModal = () => {
         setIsOpenModal(false);
+    };
+
+    const onClickPagination = (page: number) => {
+        dispatch(ordersPageActions.setPage(page));
+        fetchOrdersData();
     };
 
     const onChangeSort = (newSort: string) => {
@@ -91,6 +104,12 @@ function OrdersPage() {
                 onChangeOrder={onChangeOrder}
                 onChangeSort={onChangeSort}
                 onClickStatus={onClickStatus}
+            />
+            <PagePagination
+                totalData={totalData}
+                amount={limit}
+                page={page}
+                onClick={onClickPagination}
             />
             <List<Order>
                 itemsToRender={orders}

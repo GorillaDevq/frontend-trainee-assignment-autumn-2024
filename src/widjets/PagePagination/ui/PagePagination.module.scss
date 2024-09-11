@@ -3,7 +3,10 @@
     display: flex;
     column-gap: 10px;
     padding-bottom: 50px;
+    min-height: 98px;
+    box-sizing: border-box;
     align-self: center;
+    justify-content: center;
 
     &__item {
         display: flex;

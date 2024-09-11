@@ -6,14 +6,12 @@ import {
 import { classNames } from 'shared/lib/classNames/classNames';
 import { createAdvertisementByid } from 'features/CreateAdvertisement';
 import { List } from 'shared/ui/List/List';
-import { advertisementsPageActions } from 'pages/AdvertisementsPage';
-import { FormDataType } from 'widjets/AdvertisementModal/ui/AdvertisementForm/AdvertisementForm';
-import { AdvertisementModal } from 'widjets/AdvertisementModal';
+import { FormDataType, AdvertisementModal } from 'widjets/AdvertisementModal';
 import { AdvertisementItemSkeleton } from 'entities/Advertisement';
 import { useAbortControllerManager } from 'shared/hooks/useAbortControllerManager';
 
-import { PaginationAdvertisements } from 'pages/AdvertisementsPage/ui/AdvertisementsPagePagination';
-
+import { advertisementsPageActions } from '../../model/slice/advertisementsPageSlice';
+import { PagePagination } from '../../../../widjets/PagePagination';
 import {
     AdvertisementsPageFilters,
 } from '../AdvertisementsPageFilters/AdvertisementsPageFilters';
@@ -24,7 +22,7 @@ import cls from './AdvertisementsPage.module.scss';
 import {
     getAdvertisementPageData,
     getAdvertisementPageIsLoading,
-    getAdvertisementPageLimit,
+    getAdvertisementPageLimit, getAdvertisementPageNum,
     getAdvertisementPageTotal,
 } from '../../model/selectors/advertisementsPage';
 import { renderAdvertisementsListItem } from '../../lib/renderAdvertisementsListItem';
@@ -36,7 +34,7 @@ function AdvertisementsPage() {
     const advertisements = useSelector(getAdvertisementPageData);
     const limit = useSelector(getAdvertisementPageLimit);
     const totalData = useSelector(getAdvertisementPageTotal);
-
+    const page = useSelector(getAdvertisementPageNum);
     const [isOpenModal, setIsOpenModal] = useState(false);
 
     const [controllersRef, abortAllRequests] = useAbortControllerManager();
@@ -80,7 +78,8 @@ function AdvertisementsPage() {
     return (
         <section className={classNames(cls.page)}>
             <AdvertisementsPageFilters onOpen={onOpenModal} fetchData={fetchAdvertisementsData} />
-            <PaginationAdvertisements
+            <PagePagination
+                page={page}
                 totalData={totalData}
                 amount={limit}
                 onClick={onClickPagination}

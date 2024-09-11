@@ -276,17 +276,6 @@
           "likes": 302,
           "imageUrl": "https://s0.rbk.ru/v6_top_pics/media/img/0/64/756629830857640.jpg",
           "count": 3
-        },
-        {
-          "id": "6",
-          "name": "Картонная коробка",
-          "description": "Почная.",
-          "price": 7000,
-          "createdAt": "2024-04-12T20:16:55.351Z",
-          "views": 1,
-          "likes": 0,
-          "imageUrl": "https://volgograd.ppack.ru/image/cache/data/catalog2017/Gofrokoroba-category-800x600.jpg",
-          "count": 2
         }
       ]
     },
@@ -411,6 +400,66 @@
           "likes": 0,
           "imageUrl": "https://img.ostin.com/upload/mdm/media_content/resize/a17/767_1062_82d3/106378080299.jpg",
           "count": 5
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "status": 0,
+      "createdAt": "2024-08-12T20:20:55.351Z",
+      "finishedAt": "",
+      "total": 314000,
+      "deliveryWay": "mail",
+      "items": [
+        {
+          "id": "8",
+          "name": "Новый айфон",
+          "price": 100000,
+          "createdAt": "2024-08-12T12:16:55.351Z",
+          "views": 200000,
+          "likes": 302,
+          "imageUrl": "https://s0.rbk.ru/v6_top_pics/media/img/0/64/756629830857640.jpg",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "status": 0,
+      "createdAt": "2024-08-12T20:20:55.351Z",
+      "finishedAt": "",
+      "total": 314000,
+      "deliveryWay": "mail",
+      "items": [
+        {
+          "id": "8",
+          "name": "Новый айфон",
+          "price": 100000,
+          "createdAt": "2024-08-12T12:16:55.351Z",
+          "views": 200000,
+          "likes": 302,
+          "imageUrl": "https://s0.rbk.ru/v6_top_pics/media/img/0/64/756629830857640.jpg",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "id": "8",
+      "status": 0,
+      "createdAt": "2024-08-12T20:20:55.351Z",
+      "finishedAt": "",
+      "total": 314000,
+      "deliveryWay": "mail",
+      "items": [
+        {
+          "id": "8",
+          "name": "Новый айфон",
+          "price": 100000,
+          "createdAt": "2024-08-12T12:16:55.351Z",
+          "views": 200000,
+          "likes": 302,
+          "imageUrl": "https://s0.rbk.ru/v6_top_pics/media/img/0/64/756629830857640.jpg",
+          "count": 3
         }
       ]
     }
