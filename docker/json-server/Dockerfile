@@ -8,4 +8,4 @@ COPY /json-server/db.json /json-server/db.json
 
 EXPOSE 3000
 
-CMD ["json-server", "--watch", "db.json", "--port", "3000"]
+CMD ["json-server", "--watch", "db.json", "--port", "3000", "--delay", "5000"]

@@ -1,5 +1,5 @@
 .advertisement {
-
+    min-height: max-content;
     &__container {
         display: flex;
         flex-direction: column;
@@ -14,6 +14,9 @@
     &__title {
         margin: 0;
         font: $font_text_xl;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     &__price {
@@ -28,6 +31,7 @@
         column-gap: 20px;
         background-color: $background-primary-color;
         border-radius: 10px;
+        padding: 20px;
     }
 
 
@@ -44,8 +48,8 @@
         font-weight: 400;
     }
 
-    &__about-title {
-        margin: 0;
+    &__aboutTitle {
+        margin: 0 0 10px 0;
         font: $font_text_l;
     }
 

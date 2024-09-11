@@ -17,7 +17,7 @@ describe('fetchAdvertisementById', () => {
     test('Успешное получение данных', async () => {
         const thunk = new TestAsyncThunk(fetchAdvertisementById);
         thunk.api.get.mockReturnValue(Promise.resolve({ data: advertisement }));
-        const result = await thunk.callThunk('1');
+        const result = await thunk.callThunk('kjl');
 
         expect(thunk.dispatch).toHaveBeenCalledTimes(2);
         expect(thunk.api.get).toHaveBeenCalled();
@@ -28,7 +28,7 @@ describe('fetchAdvertisementById', () => {
     test('error fetch', async () => {
         const thunk = new TestAsyncThunk(fetchAdvertisementById);
         thunk.api.get.mockReturnValue(Promise.resolve({ status: 403 }));
-        const result = await thunk.callThunk('22');
+        const result = await thunk.callThunk('jkl');
 
         expect(thunk.dispatch).toHaveBeenCalledTimes(2);
         expect(thunk.api.get).toHaveBeenCalled();

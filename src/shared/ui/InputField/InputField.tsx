@@ -25,17 +25,18 @@ export const InputField = ({
 }: InputFieldProps) => (
     <div className={classNames(cls.field, {}, [className])}>
         <label
-            className={cls.label}
+            className={cls.field__label}
             htmlFor={name}
         >
             {label}:
         </label>
         <input
-            className={cls.input}
+            id={name}
+            className={cls.field__input}
             placeholder={placeholder}
             type={type}
             {...register(name, validationOptions)}
         />
-        {error && <span>{error.message}</span>}
+        {error && <span className={cls.field__error}>{error.message}</span>}
     </div>
 );

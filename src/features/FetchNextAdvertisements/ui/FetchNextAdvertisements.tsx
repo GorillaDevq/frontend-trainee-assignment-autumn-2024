@@ -6,19 +6,19 @@ type FetchNextAdvertisementsProps = {
     className?: string;
     onClick: () => void;
     hasMore: boolean;
-    disabled?: boolean;
+    isLoading?: boolean;
 }
 
 export const FetchNextAdvertisements = ({
     className,
     onClick,
     hasMore,
-    disabled,
+    isLoading,
 }: FetchNextAdvertisementsProps) => {
-    if (hasMore) {
+    if (hasMore && !isLoading) {
         return (
             <Button
-                disabled={disabled}
+                disabled={isLoading}
                 className={classNames(cls.button, {}, [className])}
                 onClick={onClick}
             >

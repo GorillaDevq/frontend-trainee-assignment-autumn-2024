@@ -44,3 +44,24 @@
 .button {
     margin-top: auto;
 }
+
+.button {
+    @include button_reset;
+
+    font: $font_text_m;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $primary-color;
+    padding: 10px 15px;
+    transition: $primary-transition;
+    height: min-content;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+
+    &:hover {
+        background-color: $primary-color-hover;
+    }
+}
+

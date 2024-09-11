@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useAppDispatch } from 'shared/hooks/useAppDispatch';
 import { List } from 'shared/ui/List/List';
 import { useSelector } from 'react-redux';
 import { SortOrdersPanel } from 'features/SortOrders';
-import { Order } from 'entities/Order';
-
+import { deleteOrderById, Order, OrderSkeleton } from 'entities/Order';
 import { useDebounce } from 'shared/hooks/useDebounce';
 import { OrderDetailsModal } from 'widjets/OrderDetailsModal/ui/OrderDetailsModal';
-import { fetchOrderDetails } from 'pages/OrdersPage/model/services/fetchOrderDetails/fetchOrderDetails';
-import { AdvertisementItemSkeleton } from 'entities/Advertisement';
+import { useAbortControllerManager } from 'shared/hooks/useAbortControllerManager';
+
+import { fetchOrderDetails } from '../../model/services/fetchOrderDetails/fetchOrderDetails';
 import { ordersPageActions } from '../../model/slice/ordersPageSlice';
 import { fetchOrdersList } from '../../model/services/fetchOrdersList/fetchOrdersList';
 import {
@@ -30,11 +30,25 @@ function OrdersPage() {
 
     const [isOpenModal, setIsOpenModal] = useState(false);
 
-    const fetchOrdersData = () => {
-        dispatch(fetchOrdersList({ replace: true }));
+    const [controllersRef, abortAllRequests] = useAbortControllerManager();
+
+    const fetchOrdersData = useCallback(async (replace?: boolean) => {
+        const controller = new AbortController();
+        controllersRef.current.push(controller);
+        await dispatch(fetchOrdersList({ signal: controller.signal, replace }));
+        controllersRef.current = controllersRef.current.filter((controllerItem) => controller !== controllerItem);
+    }, [controllersRef, dispatch]);
+
+    const fetchData = () => {
+        fetchOrdersData(true);
     };
 
-    const debouncedFetchOrders = useDebounce(fetchOrdersData, 500);
+    const deleteOrderHandler = (id: string) => {
+        dispatch(deleteOrderById(id));
+    };
+
+    const debouncedFetchOrders = useDebounce(fetchData, 500);
+    const debouncedDeleteOrders = useDebounce(deleteOrderHandler, 500);
 
     const onOpenModal = async (id: string) => {
         await dispatch(fetchOrderDetails(id));
@@ -61,11 +75,13 @@ function OrdersPage() {
     };
 
     useEffect(() => {
-        dispatch(fetchOrdersList({}));
+        fetchOrdersData();
+
         return () => {
+            abortAllRequests();
             dispatch(ordersPageActions.clearState());
         };
-    }, [dispatch]);
+    }, [abortAllRequests, dispatch, fetchOrdersData]);
 
     return (
         <section>
@@ -80,18 +96,24 @@ function OrdersPage() {
                 itemsToRender={orders}
                 renderFunction={(order) => (
                     <li key={order.id}>
-                        <Order order={order} onClick={onOpenModal} />
+                        <Order
+                            order={order}
+                            onDeleteOrder={debouncedDeleteOrders}
+                            onOpenModal={onOpenModal}
+                        />
                     </li>
                 )}
                 isLoading={isLoading}
-                Skeleton={AdvertisementItemSkeleton}
+                Skeleton={OrderSkeleton}
                 className={cls.page__list}
             />
-            <OrderDetailsModal
-                isOpen={isOpenModal}
-                onClose={onCloseModal}
-                orderItems={orderItems}
-            />
+            {isOpenModal && (
+                <OrderDetailsModal
+                    isOpen={isOpenModal}
+                    onClose={onCloseModal}
+                    orderItems={orderItems}
+                />
+            )}
         </section>
     );
 }

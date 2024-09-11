@@ -7,13 +7,15 @@ import { getOrderStatusString } from '../../lib/getOrderStatusString';
 type OrderItemProps = {
     className?: string;
     order: Order;
-    onClick: (id: string) => void;
+    onOpenModal: (id: string) => void;
+    onDeleteOrder: (id: string) => void;
 }
 
 export const Order = ({
     className,
     order,
-    onClick,
+    onOpenModal,
+    onDeleteOrder,
 }:OrderItemProps) => {
     const {
         id,
@@ -36,14 +38,15 @@ export const Order = ({
             </ul>
             <div className={cls.buttons}>
                 <Button
-                    theme={ButtonTheme.SECONDARY}
+                    theme={ButtonTheme.RED}
+                    onClick={() => onDeleteOrder(id)}
                     type="button"
                 >
                     Завершить
                 </Button>
                 <Button
                     theme={ButtonTheme.SECONDARY}
-                    onClick={() => onClick(id)}
+                    onClick={() => onOpenModal(id)}
                     type="button"
                 >Посмотреть товары
                 </Button>

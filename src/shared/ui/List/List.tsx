@@ -30,6 +30,9 @@ export const List = <T, >({
                     <Skeleton />
                 </>
             )}
+            {
+                !itemsToRender.length && !isLoading && (<h2 className={cls.list__not}>Данных не найдено</h2>)
+            }
         </ul>
     );
 };

@@ -4,7 +4,8 @@ import cls from './Button.module.scss';
 
 export enum ButtonTheme {
     PRIMARY = 'button_primary',
-    SECONDARY = 'button_secondary'
+    SECONDARY = 'button_secondary',
+    RED = 'button_red',
 }
 
 type ButtonProps = {

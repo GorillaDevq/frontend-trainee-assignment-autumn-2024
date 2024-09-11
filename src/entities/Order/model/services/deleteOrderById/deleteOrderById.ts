@@ -2,20 +2,16 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from 'app/providers/StoreProvider';
 import { ERROR_MESSAGE } from 'shared/const/common';
 
-export const fetchAdvertisementById = createAsyncThunk<
-    Advertisement,
-    string,
-    ThunkConfig<string>
->(
-    'orderDetails/fetchAdvertisementById',
-    async (id, thunkApi) => {
+export const deleteOrderById = createAsyncThunk<string, string, ThunkConfig<string>>(
+    'advertisementDetails/deleteOrderById',
+    async (advertisementId, thunkApi) => {
         const { extra, rejectWithValue } = thunkApi;
         try {
-            const response = await extra.api.get<Advertisement>(`/advertisements/${id}`);
+            const response = await extra.api.delete<Order>(`/orders/${advertisementId}`);
 
             if (!response.data) throw new Error();
 
-            return response.data;
+            return advertisementId;
         } catch (err) {
             return rejectWithValue(ERROR_MESSAGE);
         }

@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import {
     fetchOrderById,
 } from '../services/fetchOrderById/fetchOrderById';
@@ -24,7 +24,7 @@ const orderDetailsSlice = createSlice({
                 state.isLoading = false;
                 state.error = action.payload;
             })
-            .addCase(fetchOrderById.fulfilled, (state, action: PayloadAction<Order>) => {
+            .addCase(fetchOrderById.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.error = undefined;
                 state.order = action.payload;

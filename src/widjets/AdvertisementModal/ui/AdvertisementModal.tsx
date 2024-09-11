@@ -1,4 +1,6 @@
 import { Modal } from 'shared/ui/Modal/Modal';
+import { Suspense } from 'react';
+import { Loader } from 'shared/ui/Loader/Loader';
 import { AdvertisementForm, FormDataType } from './AdvertisementForm/AdvertisementForm';
 
 type EditAdvertisementModalProps = {
@@ -17,10 +19,13 @@ export const AdvertisementModal = ({
     <Modal
         isOpen={isOpen}
         onClose={onClose}
+        lazy
     >
-        <AdvertisementForm
-            onSubmit={onSubmit}
-            mode={mode}
-        />
+        <Suspense fallback={<Loader />}>
+            <AdvertisementForm
+                onSubmit={onSubmit}
+                mode={mode}
+            />
+        </Suspense>
     </Modal>
 );

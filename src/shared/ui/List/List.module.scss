@@ -1,8 +1,9 @@
 .list {
     @include list_reset;
-
-    &__trigger {
-        height: 10px;
-        margin: 5px 0;
+    padding-bottom: 30px;
+    &__not {
+        text-align: center;
+        color: $primary-color;
+        grid-column: 2;
     }
 }

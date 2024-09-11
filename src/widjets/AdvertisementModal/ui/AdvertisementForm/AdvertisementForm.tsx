@@ -5,6 +5,7 @@ import { InputField } from 'shared/ui/InputField/InputField';
 import { Button } from 'shared/ui/Button/Button';
 import { getFormIsLoading } from 'entities/Form';
 import { getAdvertisementDetailsData } from 'entities/Advertisement';
+import { getFormError } from 'entities/Form/model/selectors/form';
 import cls from './AdvertisementForm.module.scss';
 
 export type FormDataType = {
@@ -24,6 +25,7 @@ export const AdvertisementForm = ({
     onSubmit,
 }:EditAdvertisementFormProps) => {
     const isLoading = useSelector(getFormIsLoading);
+    const fetchError = useSelector(getFormError);
     const advertisement = useSelector(getAdvertisementDetailsData);
 
     const {
@@ -51,7 +53,13 @@ export const AdvertisementForm = ({
                 name="imageUrl"
                 error={errors.imageUrl}
                 register={register}
-                validationOptions={{ required: 'Ссылка обязательна' }}
+                validationOptions={{
+                    required: 'Ссылка обязательна',
+                    pattern: {
+                        value: /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|svg))/i,
+                        message: 'Введите корректную ссылку',
+                    },
+                }}
                 placeholder="Введите ссылку на изображение"
             />
             <InputField
@@ -84,12 +92,15 @@ export const AdvertisementForm = ({
                 placeholder="Введите описание товара"
             />
             <Button
-                className={cls.button}
+                className={cls.form__button}
                 type="submit"
                 disabled={isLoading}
             >
-                {isLoading ? 'Loading...' : 'Submit'}
+                {isLoading ? 'Загрузка...' : 'Отправить'}
             </Button>
+            {!!fetchError && (
+                <span className={cls.form__error}>{fetchError}</span>
+            )}
         </form>
     );
 };

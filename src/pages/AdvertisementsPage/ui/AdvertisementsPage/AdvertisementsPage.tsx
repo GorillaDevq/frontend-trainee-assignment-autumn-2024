@@ -14,9 +14,6 @@ import { AdvertisementItemSkeleton } from 'entities/Advertisement';
 
 import { useAbortControllerManager } from 'shared/hooks/useAbortControllerManager';
 import {
-    fetchNextAdvertisementsPage,
-} from '../../model/services/fetchNextAdvertisementsPage/fetchNextAdvertisementsPage';
-import {
     AdvertisementsPageFilters,
 } from '../AdvertisementsPageFilters/AdvertisementsPageFilters';
 import {
@@ -45,10 +42,17 @@ function AdvertisementsPage() {
 
     const [controllersRef, abortAllRequests] = useAbortControllerManager();
 
+    const fetchAdvertisementsData = useCallback(async (replace?: boolean) => {
+        const controller = new AbortController();
+        controllersRef.current.push(controller);
+        await dispatch(fetchAdvertisementsList({ signal: controller.signal, replace }));
+        controllersRef.current = controllersRef.current.filter((controllerItem) => controller !== controllerItem);
+    }, [controllersRef, dispatch]);
+
     const onLoadNextAdvertisements = () => {
         dispatch(advertisementsPageActions.setStartNumberToRender(endNumber));
         dispatch(advertisementsPageActions.setEndNumberToRender(endNumber + amount));
-        dispatch(fetchNextAdvertisementsPage());
+        fetchAdvertisementsData();
     };
 
     const onOpenModal = () => {
@@ -63,13 +67,6 @@ function AdvertisementsPage() {
         const response = await dispatch(createAdvertisementByid(data));
         if (response.meta.requestStatus === 'fulfilled') onCloseModal();
     };
-
-    const fetchAdvertisementsData = useCallback(async (replace?: boolean) => {
-        const controller = new AbortController();
-        controllersRef.current.push(controller);
-        await dispatch(fetchAdvertisementsList({ signal: controller.signal, replace }));
-        controllersRef.current = controllersRef.current.filter((controllerItem) => controller !== controllerItem);
-    }, [controllersRef, dispatch]);
 
     useEffect(() => {
         fetchAdvertisementsData();
@@ -93,14 +90,16 @@ function AdvertisementsPage() {
             <FetchNextAdvertisements
                 onClick={onLoadNextAdvertisements}
                 hasMore={hasMore}
-                disabled={isLoading}
+                isLoading={isLoading}
             />
-            <AdvertisementModal
-                onSubmit={onSubmitForm}
-                isOpen={isOpenModal}
-                onClose={onCloseModal}
-                mode="create"
-            />
+            {isOpenModal && (
+                <AdvertisementModal
+                    onSubmit={onSubmitForm}
+                    isOpen={isOpenModal}
+                    onClose={onCloseModal}
+                    mode="create"
+                />
+            )}
         </section>
     );
 }

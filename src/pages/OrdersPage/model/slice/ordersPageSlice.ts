@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchOrderDetails } from 'pages/OrdersPage/model/services/fetchOrderDetails/fetchOrderDetails';
+import { deleteOrderById } from 'entities/Order';
+
 import {
     fetchOrdersList,
 } from '../services/fetchOrdersList/fetchOrdersList';
@@ -32,6 +34,9 @@ const ordersPageSlice = createSlice({
         clearState: (state) => {
             Object.assign(state, initialState);
         },
+        setNewData: (state, action) => {
+            state.listData = action.payload;
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -52,12 +57,14 @@ const ordersPageSlice = createSlice({
                 }
             })
             .addCase(fetchOrdersList.rejected, (state, action) => {
-                state.isLoading = false;
+                state.isLoading = true;
                 state.error = action.payload;
             })
             .addCase(fetchOrderDetails.fulfilled, (state, action) => {
-                state.isLoading = false;
                 state.orderItemsDetails = action.payload;
+            })
+            .addCase(deleteOrderById.fulfilled, (state, action) => {
+                state.listData = state.listData.filter((order) => order.id !== action.payload);
             });
     },
 });

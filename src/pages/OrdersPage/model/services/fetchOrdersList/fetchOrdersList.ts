@@ -2,6 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from 'app/providers/StoreProvider';
 import { ERROR_MESSAGE } from 'shared/const/common';
 
+import { ordersPageActions } from 'pages/OrdersPage';
 import {
     getOrdersPageOrder,
     getOrdersPageSort, getOrdersPageStatus,
@@ -9,6 +10,7 @@ import {
 
 type fetchOrdersListProps = {
     replace?: boolean;
+    signal?: AbortSignal;
 }
 
 export const fetchOrdersList = createAsyncThunk<
@@ -19,7 +21,7 @@ export const fetchOrdersList = createAsyncThunk<
     'ordersPage/fetchOrdersList',
     async (props, thunkApi) => {
         const {
-            extra, rejectWithValue, getState,
+            extra, rejectWithValue, getState, dispatch,
         } = thunkApi;
 
         const sort = getOrdersPageSort(getState());
@@ -27,19 +29,23 @@ export const fetchOrdersList = createAsyncThunk<
         const status = getOrdersPageStatus(getState());
 
         try {
+            if (props.replace) {
+                dispatch(ordersPageActions.setNewData([]));
+            }
+
             const response = await extra.api.get<Order[]>('/orders', {
                 params: {
                     _sort: sort,
                     _order: order,
                     ...(status !== -1 && { status }),
                 },
+                signal: props.signal,
             });
 
             if (!response.data) throw new Error();
 
             return response.data;
         } catch (err) {
-            console.log(err);
             return rejectWithValue(ERROR_MESSAGE);
         }
     },

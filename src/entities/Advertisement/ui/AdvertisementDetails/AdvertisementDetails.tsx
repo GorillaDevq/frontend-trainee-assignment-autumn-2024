@@ -1,12 +1,13 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from 'shared/hooks/useAppDispatch';
 import { classNames } from 'shared/lib/classNames/classNames';
+import { Loader } from 'shared/ui/Loader/Loader';
+import { MAX_LENGTH_DESCRIPTION } from 'entities/Advertisement/lib/config';
 
-import { advertisementDetailsActions } from 'entities/Advertisement';
-import {
-    fetchAdvertisementById,
-} from '../../model/services/fetchAdvertisementById/fetchAdvertisementById';
+import { Button, ButtonTheme } from 'shared/ui/Button/Button';
+import { advertisementDetailsActions } from '../../model/slice/advertisementDetailsSlice';
+import { fetchAdvertisementById } from '../../model/services/fetchAdvertisementById/fetchAdvertisementById';
 import {
     getAdvertisementDetailsData,
     getAdvertisementDetailsError,
@@ -24,23 +25,46 @@ export const AdvertisementDetails = ({
     className,
     id,
 }: AdvertisementDetailsProps) => {
+    const [isExpanded, setIsExpanded] = useState(false);
+
     const dispatch = useAppDispatch();
+
     const isLoading = useSelector(getAdvertisementDetailsIsLoading);
     const error = useSelector(getAdvertisementDetailsError);
     const advertisement = useSelector(getAdvertisementDetailsData);
 
+    const toggleReadMore = () => setIsExpanded((prev) => !prev);
+
     useEffect(() => {
         dispatch(fetchAdvertisementById(id));
+
         return () => {
             dispatch(advertisementDetailsActions.resetState());
         };
     }, [dispatch, id]);
 
+    const renderDescription = (description: string) => {
+        if (description.length > MAX_LENGTH_DESCRIPTION) {
+            if (isExpanded) {
+                return description;
+            }
+            return (
+                <>
+                    {description.slice(0, MAX_LENGTH_DESCRIPTION)}...
+                    <Button theme={ButtonTheme.SECONDARY} onClick={toggleReadMore}>
+                        Читать далее
+                    </Button>
+                </>
+            );
+        }
+        return description;
+    };
+
     let content;
 
     if (isLoading) {
         content = (
-            <div>LOADING Объявление</div>
+            <div><Loader /></div>
         );
     } else if (error) {
         content = (
@@ -63,7 +87,8 @@ export const AdvertisementDetails = ({
                     />
                     <div className={cls.advertisement__about}>
                         <h3 className={cls.advertisement__aboutTitle}>Описание</h3>
-                        {advertisement?.description}
+                        {/* eslint-disable-next-line max-len */}
+                        {advertisement?.description ? renderDescription(advertisement.description) : 'Описание отсутствует'}
                     </div>
                 </div>
             </article>

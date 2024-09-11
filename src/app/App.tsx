@@ -12,9 +12,6 @@ function App() {
                     <AppRouter />
                 </main>
             </Suspense>
-            <footer className="footer">
-                Подвал
-            </footer>
         </div>
     );
 }

@@ -10,13 +10,13 @@ export const AdvertisementItemSkeleton = ({
     className,
 }: AdvertisementItemProps) => (
     <div className={classNames(cls.advertisement, {}, [className])}>
-        <Skeleton className={cls.advertisement__image} height={330} />
-        <Skeleton className={cls.title} height={25} />
-        <Skeleton className={cls.price} height={25} />
+        <Skeleton height={330} />
+        <Skeleton height={25} />
+        <Skeleton height={25} />
         <ul className={cls.list}>
-            <Skeleton className={cls.item} height={25} />
-            <Skeleton className={cls.item} height={25} />
+            <Skeleton height={25} />
+            <Skeleton height={25} />
         </ul>
-        <Skeleton className={cls.button} height={25} />
+        <Skeleton height={25} />
     </div>
 );

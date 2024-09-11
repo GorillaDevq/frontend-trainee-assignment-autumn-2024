@@ -1,23 +1,23 @@
 import { useParams } from 'react-router-dom';
-import { AdvertisementDetails } from 'entities/Advertisement/ui/AdvertisementDetails/AdvertisementDetails';
+import { useSelector } from 'react-redux';
+import {
+    AdvertisementDetails,
+    advertisementDetailsActions,
+    getAdvertisementDetailsData,
+} from 'entities/Advertisement';
 import { useState } from 'react';
 import { Button } from 'shared/ui/Button/Button';
 import { AdvertisementModal, FormDataType } from 'widjets/AdvertisementModal';
-import { useSelector } from 'react-redux';
-import { advertisementDetailsActions, getAdvertisementDetailsData } from 'entities/Advertisement';
-import {
-    editAdvertisementById,
-} from 'features/EditAdvertisement/model/services/editAdvertisementByid/editAdvertisementByid';
+import { editAdvertisementById } from 'features/EditAdvertisement';
 import { useAppDispatch } from 'shared/hooks/useAppDispatch';
 import cls from './AdvertisementDetailsPage.module.scss';
 
 const AdvertisementDetailsPage = () => {
     const { id } = useParams<{id: string}>();
+    const [isOpenModal, setIsOpenModal] = useState(false);
 
     const dispatch = useAppDispatch();
     const advertisement = useSelector(getAdvertisementDetailsData);
-
-    const [isOpenModal, setIsOpenModal] = useState(false);
 
     const onOpenModal = () => {
         setIsOpenModal(true);
@@ -48,13 +48,17 @@ const AdvertisementDetailsPage = () => {
     return (
         <section className={cls.page}>
             <Button className={cls.page__edit} onClick={onOpenModal}>Редактировать</Button>
-            <AdvertisementDetails id={id} />
-            <AdvertisementModal
-                isOpen={isOpenModal}
-                onClose={onCloseModal}
-                onSubmit={onSubmitForm}
-                mode="edit"
+            <AdvertisementDetails
+                id={id}
             />
+            {isOpenModal && (
+                <AdvertisementModal
+                    isOpen={isOpenModal}
+                    onClose={onCloseModal}
+                    onSubmit={onSubmitForm}
+                    mode="edit"
+                />
+            )}
         </section>
     );
 };
