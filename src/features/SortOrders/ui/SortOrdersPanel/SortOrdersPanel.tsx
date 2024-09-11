@@ -1,6 +1,6 @@
 import { Select } from 'shared/ui/Select/Select';
 import { classNames } from 'shared/lib/classNames/classNames';
-import { Button } from 'shared/ui/Button/Button';
+import { Button, ButtonTheme } from 'shared/ui/Button/Button';
 import { getOrderStatusString, SORT_BUTTONS_STATUS } from 'entities/Order';
 import { RESET_STATUS } from 'shared/const/common';
 
@@ -30,26 +30,32 @@ export const SortOrdersPanel = ({
         >
             Сбросить статус
         </Button>
-        {SORT_BUTTONS_STATUS.map((status) => (
-            <Button
-                onClick={() => onClickStatus(status)}
-                key={status}
-            >
-                {getOrderStatusString(status)}
-            </Button>
-        ))}
-        <Select
-            options={SORT_FIELD_OPTIONS}
-            label="Сортировать по:"
-            onChange={onChangeSort}
-            value={sort}
-        />
-        <Select
-            options={ORDER_OPTIONS}
-            label="по:"
-            onChange={onChangeOrder}
-            value={order}
-            readonly={!sort.length}
-        />
+        <div className={cls.buttons}>
+            {SORT_BUTTONS_STATUS.map((status) => (
+                <Button
+                    theme={ButtonTheme.SECONDARY}
+                    onClick={() => onClickStatus(status)}
+                    key={status}
+                >
+                    {getOrderStatusString(status)}
+                </Button>
+            ))}
+        </div>
+
+        <div className={cls.container}>
+            <Select
+                options={SORT_FIELD_OPTIONS}
+                label="Сортировать по:"
+                onChange={onChangeSort}
+                value={sort}
+            />
+            <Select
+                options={ORDER_OPTIONS}
+                label="по:"
+                onChange={onChangeOrder}
+                value={order}
+                readonly={!sort.length}
+            />
+        </div>
     </div>
 );

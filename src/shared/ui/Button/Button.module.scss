@@ -14,10 +14,23 @@
         color: white;
         background-color: $primary-color;
         border-radius: 6px;
+
+        &:hover {
+            background-color: $primary-color-hover;
+        }
     }
 
-    &:hover {
-        background-color: $primary-color-hover;
+    &_secondary {
+        color: $primary-color;
+        font: $font_text_s;
+        width: max-content;
+        background-color: inherit;
+        border: 1px dashed $primary-color;
+        border-radius: 6px;
+
+        &:hover {
+            background-color: $background-primary-color;
+        }
     }
 }
 

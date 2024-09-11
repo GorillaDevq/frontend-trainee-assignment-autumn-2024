@@ -1,3 +1,18 @@
 .list {
     display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.buttons {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: $background-primary-color;
 }

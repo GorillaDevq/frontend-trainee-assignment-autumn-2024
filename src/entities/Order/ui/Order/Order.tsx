@@ -1,6 +1,6 @@
 import { classNames } from 'shared/lib/classNames/classNames';
 import { formatDate } from 'shared/lib/formatDate/formatDate';
-import { Button } from 'shared/ui/Button/Button';
+import { Button, ButtonTheme } from 'shared/ui/Button/Button';
 import cls from './Order.module.scss';
 import { getOrderStatusString } from '../../lib/getOrderStatusString';
 
@@ -34,9 +34,15 @@ export const Order = ({
                 <li>Стоимость: {total}</li>
                 <li>Создан: {formatDate(createdAt)}</li>
             </ul>
-            <div>
-                <Button type="button">Завершить</Button>
+            <div className={cls.buttons}>
                 <Button
+                    theme={ButtonTheme.SECONDARY}
+                    type="button"
+                >
+                    Завершить
+                </Button>
+                <Button
+                    theme={ButtonTheme.SECONDARY}
                     onClick={() => onClick(id)}
                     type="button"
                 >Посмотреть товары

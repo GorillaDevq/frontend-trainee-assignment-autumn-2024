@@ -17,6 +17,7 @@ import {
     getOrdersPageOrder,
     getOrdersPageSort,
 } from '../../model/selectors/ordersPage';
+import cls from './OrdersPage.module.scss';
 
 function OrdersPage() {
     const dispatch = useAppDispatch();
@@ -84,6 +85,7 @@ function OrdersPage() {
                 )}
                 isLoading={isLoading}
                 Skeleton={AdvertisementItemSkeleton}
+                className={cls.page__list}
             />
             <OrderDetailsModal
                 isOpen={isOpenModal}
