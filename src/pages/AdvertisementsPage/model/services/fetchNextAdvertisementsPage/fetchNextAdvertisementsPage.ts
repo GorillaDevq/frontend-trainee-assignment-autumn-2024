@@ -1,11 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from 'app/providers/StoreProvider';
 import {
-    getAdvertisementPageEndNumberToRender,
     getAdvertisementPageHasMore,
-    getAdvertisementPageIsLoading, getAdvertisementPageStartNumberToRender,
+    getAdvertisementPageIsLoading,
 } from '../../selectors/advertisementsPage';
-import { advertisementsPageActions } from '../../slice/advertisementsPageSlice';
 import {
     fetchAdvertisementsList,
 } from '../../services/fetchAdvertisementsList/fetchAdvertisementsList';

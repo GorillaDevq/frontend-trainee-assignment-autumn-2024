@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from 'app/providers/StoreProvider';
 import { advertisementsPageActions } from 'pages/AdvertisementsPage';
+import { ERROR_MESSAGE } from 'shared/const/common';
 import {
     getAdvertisementPageAmountToRender,
     getAdvertisementPageEndNumberToRender,
@@ -12,6 +13,7 @@ import {
 
 type fetchAdvertisementsListProps = {
     replace?: boolean;
+    signal?: AbortSignal;
 }
 
 export const fetchAdvertisementsList = createAsyncThunk<
@@ -46,14 +48,14 @@ export const fetchAdvertisementsList = createAsyncThunk<
                     _order: order,
                     ...(name?.length > 0 && { name }),
                 },
+                signal: props.signal,
             });
 
             if (!response.data) throw new Error();
 
             return response.data;
         } catch (err) {
-            console.log(err);
-            return rejectWithValue('Ошибка получения данных');
+            return rejectWithValue(ERROR_MESSAGE);
         }
     },
 );

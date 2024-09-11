@@ -1,6 +1,8 @@
 import { useAppDispatch } from 'shared/hooks/useAppDispatch';
 import { useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+import {
+    useCallback, useEffect, useState,
+} from 'react';
 import { classNames } from 'shared/lib/classNames/classNames';
 import { createAdvertisementByid } from 'features/CreateAdvertisement';
 import { List } from 'shared/ui/List/List';
@@ -10,6 +12,7 @@ import { FormDataType } from 'widjets/AdvertisementModal/ui/AdvertisementForm/Ad
 import { AdvertisementModal } from 'widjets/AdvertisementModal';
 import { AdvertisementItemSkeleton } from 'entities/Advertisement';
 
+import { useAbortControllerManager } from 'shared/hooks/useAbortControllerManager';
 import {
     fetchNextAdvertisementsPage,
 } from '../../model/services/fetchNextAdvertisementsPage/fetchNextAdvertisementsPage';
@@ -40,6 +43,8 @@ function AdvertisementsPage() {
 
     const [isOpenModal, setIsOpenModal] = useState(false);
 
+    const [controllersRef, abortAllRequests] = useAbortControllerManager();
+
     const onLoadNextAdvertisements = () => {
         dispatch(advertisementsPageActions.setStartNumberToRender(endNumber));
         dispatch(advertisementsPageActions.setEndNumberToRender(endNumber + amount));
@@ -59,16 +64,25 @@ function AdvertisementsPage() {
         if (response.meta.requestStatus === 'fulfilled') onCloseModal();
     };
 
+    const fetchAdvertisementsData = useCallback(async (replace?: boolean) => {
+        const controller = new AbortController();
+        controllersRef.current.push(controller);
+        await dispatch(fetchAdvertisementsList({ signal: controller.signal, replace }));
+        controllersRef.current = controllersRef.current.filter((controllerItem) => controller !== controllerItem);
+    }, [controllersRef, dispatch]);
+
     useEffect(() => {
-        dispatch(fetchAdvertisementsList({}));
+        fetchAdvertisementsData();
+
         return () => {
+            abortAllRequests();
             dispatch(advertisementsPageActions.clearState());
         };
-    }, [dispatch]);
+    }, [abortAllRequests, dispatch, fetchAdvertisementsData]);
 
     return (
         <section className={classNames(cls.page)}>
-            <AdvertisementsPageFilters onOpen={onOpenModal} />
+            <AdvertisementsPageFilters onOpen={onOpenModal} fetchData={fetchAdvertisementsData} />
             <List<Advertisement>
                 className={cls.list}
                 itemsToRender={advertisements}
