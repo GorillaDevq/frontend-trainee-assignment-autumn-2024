@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAdvertisementByid } from 'features/CreateAdvertisement';
 import {
     fetchAdvertisementsList,
 } from '../services/fetchAdvertisementsList/fetchAdvertisementsList';
@@ -72,6 +73,12 @@ const advertisementsPageSlice = createSlice({
             .addCase(fetchAdvertisementsList.rejected, (state, action) => {
                 state.isLoading = false;
                 state.error = action.payload;
+            })
+            .addCase(createAdvertisementByid.fulfilled, (state, action) => {
+                state.isLoading = false;
+                if (!state.hasMore) {
+                    state.listData = [...state.listData, action.payload];
+                }
             });
     },
 });

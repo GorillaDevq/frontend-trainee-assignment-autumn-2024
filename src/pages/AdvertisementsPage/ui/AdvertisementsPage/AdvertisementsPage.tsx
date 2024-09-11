@@ -11,8 +11,8 @@ import { advertisementsPageActions } from 'pages/AdvertisementsPage';
 import { FormDataType } from 'widjets/AdvertisementModal/ui/AdvertisementForm/AdvertisementForm';
 import { AdvertisementModal } from 'widjets/AdvertisementModal';
 import { AdvertisementItemSkeleton } from 'entities/Advertisement';
-
 import { useAbortControllerManager } from 'shared/hooks/useAbortControllerManager';
+
 import {
     AdvertisementsPageFilters,
 } from '../AdvertisementsPageFilters/AdvertisementsPageFilters';
