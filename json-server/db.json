@@ -307,6 +307,56 @@
           "likes": 0,
           "imageUrl": "https://img.ostin.com/upload/mdm/media_content/resize/a17/767_1062_82d3/106378080299.jpg",
           "count": 5
+        },
+        {
+          "id": "8",
+          "name": "Новый айфон",
+          "price": 100000,
+          "createdAt": "2024-08-12T12:16:55.351Z",
+          "views": 200000,
+          "likes": 302,
+          "imageUrl": "https://s0.rbk.ru/v6_top_pics/media/img/0/64/756629830857640.jpg",
+          "count": 3
+        },
+        {
+          "createdAt": "2024-09-09T14:34:21.653Z",
+          "views": 0,
+          "likes": 0,
+          "imageUrl": "https://sun9-20.userapi.com/impg/ICBpJQ6DTpooRLetoEhogNO774RS-A_gEj740w/IxfnvuNCS_M.jpg?size=774x519&quality=96&sign=4c26f9988df9431634b645a07c23a62a&type=album",
+          "name": "Самурай",
+          "description": "Самурай",
+          "price": 50,
+          "id": "30"
+        },
+        {
+          "createdAt": "2024-09-09T14:34:21.653Z",
+          "views": 0,
+          "likes": 0,
+          "imageUrl": "https://sun9-20.userapi.com/impg/ICBpJQ6DTpooRLetoEhogNO774RS-A_gEj740w/IxfnvuNCS_M.jpg?size=774x519&quality=96&sign=4c26f9988df9431634b645a07c23a62a&type=album",
+          "name": "Самурай",
+          "description": "Самурай",
+          "price": 50,
+          "id": "27"
+        },
+        {
+          "createdAt": "2024-09-09T14:34:21.653Z",
+          "views": 0,
+          "likes": 0,
+          "imageUrl": "https://sun9-20.userapi.com/impg/ICBpJQ6DTpooRLetoEhogNO774RS-A_gEj740w/IxfnvuNCS_M.jpg?size=774x519&quality=96&sign=4c26f9988df9431634b645a07c23a62a&type=album",
+          "name": "Самурай",
+          "description": "Самурай",
+          "price": 50,
+          "id": "26"
+        },
+        {
+          "createdAt": "2024-09-09T14:34:21.653Z",
+          "views": 0,
+          "likes": 0,
+          "imageUrl": "https://sun9-20.userapi.com/impg/ICBpJQ6DTpooRLetoEhogNO774RS-A_gEj740w/IxfnvuNCS_M.jpg?size=774x519&quality=96&sign=4c26f9988df9431634b645a07c23a62a&type=album",
+          "name": "Самурай",
+          "description": "Самурай",
+          "price": 50,
+          "id": "27"
         }
       ]
     },
