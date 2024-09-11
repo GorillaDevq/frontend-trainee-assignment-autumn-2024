@@ -1,10 +1,8 @@
 import { Provider } from 'react-redux';
-import { ReactNode } from 'react';
 import { createReduxStore } from 'app/providers/StoreProvider';
+import { PropsWithChildren } from 'shared/types/common';
 
-type StoreProviderProps = {
-    children: ReactNode;
-}
+type StoreProviderProps = PropsWithChildren
 
 export const StoreProvider = ({ children }: StoreProviderProps) => {
     const store = createReduxStore();

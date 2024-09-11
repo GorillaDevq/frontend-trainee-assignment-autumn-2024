@@ -6,7 +6,7 @@ type InputFieldProps = {
     className?: string;
     label: string;
     name: string;
-    register: UseFormRegister<any>; // TODO избавиться от any
+    register: UseFormRegister<any>;
     error?: FieldError;
     validationOptions?: RegisterOptions;
     placeholder?: string;

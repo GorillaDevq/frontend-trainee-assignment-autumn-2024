@@ -1,15 +1,13 @@
 import {
     ErrorInfo,
     Component,
-    ReactNode,
     Suspense,
 } from 'react';
 import { ErrorPage } from 'pages/ErrorPage';
 import { Loader } from 'shared/ui/Loader/Loader';
+import { PropsWithChildren } from 'shared/types/common';
 
-type ErrorBoundaryProps = {
-    children: ReactNode;
-}
+type ErrorBoundaryProps = PropsWithChildren
 
 type ErrorBoundaryState = {
     hasError: boolean;
