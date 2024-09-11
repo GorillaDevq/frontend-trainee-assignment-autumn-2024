@@ -1,9 +1,11 @@
+import { Button } from 'shared/ui/Button/Button';
+
 export const ErrorPage = () => {
     const onReload = () => window.location.reload();
 
     return (
         <div>
-            <button onClick={onReload}>Перезагрузить страницу</button>
+            <Button onClick={onReload}>Перезагрузить страницу</Button>
             Ошибка перезагрузите страницу
         </div>
     );
